@@ -46,6 +46,7 @@ class Order {
       required this.price,
       required this.customerName,
       required this.date});
+
   factory Order.fromRTDB(Map<String, dynamic> data) {
     return Order(
         description: data['description'] ?? 'drink',
