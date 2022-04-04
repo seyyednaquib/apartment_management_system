@@ -1,4 +1,5 @@
 import 'package:apartment_management_system/Contoller/userController.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_page.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read%20copy.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read.dart';
@@ -64,6 +65,15 @@ class HomeStudyRT extends GetWidget<AuthController> {
                   Get.to(Announcement());
                 },
                 child: Text('Announcements')),
+            SizedBox(
+              height: 6,
+              width: MediaQuery.of(context).size.width,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(AnnouncementPageMain());
+                },
+                child: Text('New Announcements Page')),
             SizedBox(
               height: 6,
               width: MediaQuery.of(context).size.width,

@@ -11,7 +11,8 @@ class AnnouncementController extends GetxController {
   final _db = FirebaseDatabase.instance.ref();
 
   Stream<List<AnnouncementModelTEMP>> getAnnouncementStream() {
-    final orderStream = _db.child('announcements').onValue;
+    final orderStream =
+        _db.child('announcements').orderByChild('dateCreated').onValue;
     final streamToPublish = orderStream.map((event) {
       final orderMap =
           Map<String, dynamic>.from(event.snapshot.value as dynamic);

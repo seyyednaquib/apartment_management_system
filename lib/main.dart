@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return GetMaterialApp(
       initialBinding: AuthBinding(),
       home: Root(),
-      theme: ThemeData.dark(),
+      // theme: ThemeData.dark(),
+      theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
     );
   }
 }
