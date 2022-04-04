@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "407063335657",
+    "firebase_url": "https://apartment-management-melawis-default-rtdb.firebaseio.com",
+    "project_id": "apartment-management-melawis",
+    "storage_bucket": "apartment-management-melawis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407063335657:android:3ff8f5aebbde0d8313d678",
+        "android_client_info": {
+          "package_name": "com.example.apartment_management_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407063335657-hsjpt8iao41h2ornkn06b01t26vqopp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3HXHHmjlWNqCb15-zu5TN71O7Mb623j4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407063335657-hsjpt8iao41h2ornkn06b01t26vqopp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407063335657:android:d31870988203d11113d678",
+        "android_client_info": {
+          "package_name": "com.example.apartment_management_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407063335657-hsjpt8iao41h2ornkn06b01t26vqopp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3HXHHmjlWNqCb15-zu5TN71O7Mb623j4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407063335657-hsjpt8iao41h2ornkn06b01t26vqopp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
