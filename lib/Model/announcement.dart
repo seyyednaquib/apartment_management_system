@@ -1,17 +1,23 @@
 import 'package:get/get.dart';
 
-class AnnouncementModelTEMP {
+class AnnouncementModel {
   final String content;
   final String title;
   final String date;
+  final String ImgUrl;
 
-  AnnouncementModelTEMP(
-      {required this.content, required this.title, required this.date});
+  AnnouncementModel(
+      {required this.content,
+      required this.title,
+      required this.date,
+      required this.ImgUrl});
 
-  factory AnnouncementModelTEMP.fromRTDB(Map<String, dynamic> data) {
-    return AnnouncementModelTEMP(
+  factory AnnouncementModel.fromRTDB(Map<String, dynamic> data) {
+    return AnnouncementModel(
         content: data['content'] ?? 'drink',
         title: data['title'] ?? 'UnknownSs',
-        date: data['time'] ?? 'unknownTIME');
+        date: data['time'] ?? 'unknownTIME',
+        ImgUrl: data['ImgUrl'] ??
+            'http://clipart-library.com/images/8cEjdgeXi.jpg');
   }
 }

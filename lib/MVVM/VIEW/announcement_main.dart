@@ -1,3 +1,4 @@
+import 'package:apartment_management_system/Contoller/bindings/root.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_page.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcment_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/belajar_reatltime.dart';
@@ -21,7 +22,7 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
       elevation: 0.1,
       leading: InkWell(
         onTap: () {
-          Get.offAll(HomeStudyRT());
+          Get.offAll(Root());
         },
         child: Icon(Icons.arrow_back, color: Colors.white),
       ),
@@ -41,7 +42,7 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
         builder: (context, snapshot) {
           final tileList = <Card>[];
           if (snapshot.hasData) {
-            final myOrders = snapshot.data as List<AnnouncementModelTEMP>;
+            final myOrders = snapshot.data as List<AnnouncementModel>;
             tileList.addAll(myOrders.map((nextorder) {
               return Card(
                 elevation: 8.0,
