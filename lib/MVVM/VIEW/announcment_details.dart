@@ -9,15 +9,6 @@ class AnnouncementDetails extends StatelessWidget {
   final AnnouncementModel announcement;
   @override
   Widget build(BuildContext context) {
-    final levelIndicator = Container(
-      child: Container(
-        child: LinearProgressIndicator(
-            backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: 0.2,
-            valueColor: AlwaysStoppedAnimation(Colors.green)),
-      ),
-    );
-
     final coursePrice = Container(
       padding: const EdgeInsets.all(7.0),
       decoration: BoxDecoration(
@@ -92,11 +83,11 @@ class AnnouncementDetails extends StatelessWidget {
             child: const Icon(Icons.arrow_back, color: Colors.white),
           ),
         ),
-        const Positioned(
+        Positioned(
             left: 40.0,
             bottom: 20.0,
             child: Text(
-              '28/12/2022',
+              announcement.date,
               style: TextStyle(color: Colors.white),
             ))
       ],
@@ -106,13 +97,14 @@ class AnnouncementDetails extends StatelessWidget {
       announcement.content,
       style: TextStyle(fontSize: 18.0),
     );
-    final readButton = Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: RaisedButton(
-          onPressed: () => {},
-          color: Color.fromRGBO(58, 66, 86, 1.0),
-          child: const Text("OPEN PDF", style: TextStyle(color: Colors.white)),
-        ));
+    final readButton = const Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      // child: RaisedButton(
+      //   onPressed: () => {},
+      //   color: Color.fromRGBO(58, 66, 86, 1.0),
+      //   child: const Text("OPEN PDF", style: TextStyle(color: Colors.white)),
+      // )
+    );
     final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,

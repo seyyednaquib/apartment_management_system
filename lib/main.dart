@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialBinding: AuthBinding(),
       home: Root(),
       // theme: ThemeData.dark(),
-      theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
+      theme: new ThemeData(primaryColor: Color.fromARGB(255, 255, 255, 255)),
     );
   }
 }

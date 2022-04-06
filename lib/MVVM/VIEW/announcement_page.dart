@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../Contoller/bindings/root.dart';
+
 class Announcement extends StatefulWidget {
   const Announcement({Key? key}) : super(key: key);
 
@@ -51,122 +53,206 @@ class _AnnouncementState extends State<Announcement> {
     });
   }
 
+  final TextEditingController _anounController = TextEditingController();
+  final TextEditingController _anounTitleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _anounController = TextEditingController();
-    final TextEditingController _anounTitleController = TextEditingController();
-
     return Scaffold(
-        appBar: AppBar(title: Text('Announcements')),
-        body: Padding(
-            padding: const EdgeInsets.all(2),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Add Announcement Here:",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      _showPicker(context);
-                    },
-                    child: CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Color(0xffFDCF09),
-                      child: _image != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Image.file(
-                                _image!,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.fitHeight,
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(50)),
-                              width: 100,
-                              height: 100,
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.grey[800],
-                              ),
-                            ),
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget>[
+          Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                  title: const Text(
+                    "New Announcement",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                ),
-                Card(
-                    margin: const EdgeInsets.all(20),
-                    child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _anounTitleController,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  leading: InkWell(
+                    onTap: () {
+                      Get.offAll(Root());
+                    },
+                    child: const Icon(Icons.arrow_back_ios_new,
+                        color: Colors.black),
+                  )),
+              body: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      'Title',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                            child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                          //contentPadding: EdgeInsets.all(40),
+                                          border: OutlineInputBorder()),
+                                      controller: _anounTitleController,
+                                    ),
+                                  ),
+                                ]))),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      'Details',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                            child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      minLines: 5,
+                                      maxLines: 5,
+                                      keyboardType: TextInputType.multiline,
+                                      decoration: const InputDecoration(
+                                          //contentPadding: EdgeInsets.all(40),
+                                          border: OutlineInputBorder()),
+                                      controller: _anounController,
+                                    ),
+                                  ),
+                                ]))),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      'Upload Picture',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20.0, top: 10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _showPicker(context);
+                                  },
+                                  child: Container(
+                                    child: _image != null
+                                        ? Image.file(
+                                            _image!,
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.fitHeight,
+                                          )
+                                        : Icon(
+                                            size: 50,
+                                            Icons.cloud_upload_outlined,
+                                            color: Colors.grey[800],
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (_anounController.text != "") {
+                              final String imageUrl = await uploadFile();
+                              AnnouncementController().addAnnouncement(
+                                  _anounController.text,
+                                  _anounTitleController.text,
+                                  imageUrl);
+                              _anounController.clear();
+                              _anounTitleController.clear();
+
+                              Get.back();
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(230, 125, 13, 253),
+                              fixedSize: const Size(200, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: const Text(
+                            'Announce',
+                            style: TextStyle(
+                              fontSize: 18,
                             ),
                           ),
-                        ]))),
-                Card(
-                    margin: const EdgeInsets.all(20),
-                    child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _anounController,
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () async {
-                              if (_anounController.text != "") {
-                                final String imageUrl = await uploadFile();
-                                AnnouncementController().addAnnouncement(
-                                    _anounController.text,
-                                    _anounTitleController.text,
-                                    imageUrl);
-                                _anounController.clear();
-                                _anounTitleController.clear();
-                                _image!.delete();
-                                Get.back();
-                              }
-                            },
-                          ),
-                        ]))),
-                StreamBuilder(
-                    stream: AnnouncementController().getAnnouncementStream(),
-                    builder: (context, snapshot) {
-                      final tileList = <ListTile>[];
-                      if (snapshot.hasData) {
-                        final myOrders =
-                            snapshot.data as List<AnnouncementModel>;
-                        tileList.addAll(myOrders.map((nextorder) {
-                          return ListTile(
-                            leading: Icon(Icons.newspaper_outlined),
-                            title: Text(nextorder.title),
-                            subtitle: Text(nextorder.content + ' S'),
-                          );
-                        }));
-                      }
-                      return Expanded(
-                          child: ListView(
-                        children: tileList,
-                      ));
-                    })
-              ],
-            )));
+                        ),
+                        // StreamBuilder(
+                        //     stream:
+                        //         AnnouncementController().getAnnouncementStream(),
+                        //     builder: (context, snapshot) {
+                        //       final tileList = <ListTile>[];
+                        //       if (snapshot.hasData) {
+                        //         final myOrders =
+                        //             snapshot.data as List<AnnouncementModel>;
+                        //         tileList.addAll(myOrders.map((nextorder) {
+                        //           return ListTile(
+                        //             leading: Icon(Icons.newspaper_outlined),
+                        //             title: Text(nextorder.title),
+                        //             subtitle: Text(nextorder.content + ' S'),
+                        //           );
+                        //         }));
+                        //       }
+                        //       return Expanded(
+                        //           child: ListView(
+                        //         children: tileList,
+                        //       ));
+                        //     })
+                      ],
+                    ),
+                  ))),
+        ],
+      ),
+    );
   }
 
   void _showPicker(context) {
@@ -175,20 +261,20 @@ class _AnnouncementState extends State<Announcement> {
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: new Wrap(
+              child: Wrap(
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Gallery'),
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Gallery'),
                       onTap: () {
                         imgFromGallery();
-                        Navigator.of(context).pop();
+                        Get.back();
                       }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                  ListTile(
+                    leading: const Icon(Icons.photo_camera),
+                    title: const Text('Camera'),
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Get.back();
                     },
                   ),
                 ],

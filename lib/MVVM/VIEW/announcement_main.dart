@@ -24,13 +24,20 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
         onTap: () {
           Get.offAll(Root());
         },
-        child: Icon(Icons.arrow_back, color: Colors.white),
+        child:
+            Icon(Icons.arrow_back_ios_new, color: Color.fromARGB(255, 0, 0, 0)),
       ),
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      title: Text('Announcement'),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      title: Text(
+        'Announcement',
+        style: TextStyle(color: Colors.black),
+      ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.list),
+          icon: const Icon(
+            Icons.search,
+            color: Colors.black,
+          ),
           onPressed: () {},
         )
       ],
@@ -43,35 +50,57 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
           final tileList = <Card>[];
           if (snapshot.hasData) {
             final myOrders = snapshot.data as List<AnnouncementModel>;
+            myOrders.sort((b, a) => a.date.compareTo(b.date));
             tileList.addAll(myOrders.map((nextorder) {
               return Card(
                 elevation: 8.0,
                 margin:
                     new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                 child: Container(
-                  decoration:
-                      BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(227, 252, 248, 248)),
                   child: ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
+                          horizontal: 20.0, vertical: 20.0),
                       leading: Container(
                         padding: EdgeInsets.only(right: 12.0),
                         decoration: const BoxDecoration(
                             border: Border(
                                 right: BorderSide(
-                                    width: 1.0, color: Colors.white24))),
+                                    width: 1.0, color: Colors.black))),
                         child: const Icon(Icons.newspaper_outlined,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       title: Text(
-                        nextorder.content,
+                        nextorder.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                      subtitle: const Text(
+                        'Management',
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.black,
+                          fontSize: 13,
+                        ),
+                      ),
+                      trailing: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(nextorder.ImgUrl),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                       onTap: () {
-                        Get.to(AnnouncementDetails(
-                          announcement: nextorder,
-                        ));
+                        Get.to(() => AnnouncementDetails(
+                              announcement: nextorder,
+                            ));
                       }),
                 ),
               );
@@ -111,9 +140,8 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
       ),
     );
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: topAppBar,
-      bottomNavigationBar: makeBottom,
       body: makeBody,
     );
   }

@@ -16,7 +16,7 @@ class AnnouncementModel {
     return AnnouncementModel(
         content: data['content'] ?? 'drink',
         title: data['title'] ?? 'UnknownSs',
-        date: data['time'] ?? 'unknownTIME',
+        date: data['dateCreated'] ?? 'TIME',
         ImgUrl: data['ImgUrl'] ??
             'http://clipart-library.com/images/8cEjdgeXi.jpg');
   }
