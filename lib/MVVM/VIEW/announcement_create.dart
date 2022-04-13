@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:apartment_management_system/MVVM/VIEWMODEL/announcementViewModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:apartment_management_system/Contoller/announcement_controller.dart';
 import 'package:apartment_management_system/Model/announcement.dart';
@@ -10,52 +11,14 @@ import 'package:image_picker/image_picker.dart';
 import '../../Contoller/bindings/root.dart';
 
 class Announcement extends StatefulWidget {
-  const Announcement({Key? key}) : super(key: key);
+  Announcement({Key? key}) : super(key: key);
 
   @override
   State<Announcement> createState() => _AnnouncementState();
 }
 
 class _AnnouncementState extends State<Announcement> {
-  final database = FirebaseDatabase.instance.ref();
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
-  File? _image;
-  final ImagePicker _picker = ImagePicker();
-
-  Future<String> uploadFile() async {
-    if (_image == null) return '';
-    final fileName = _image!.path;
-    final destination = 'files/$fileName';
-
-    try {
-      final ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('announcements/$fileName');
-      await ref.putFile(_image!);
-      return await ref.getDownloadURL();
-    } catch (e) {
-      print('error occured');
-      rethrow;
-    }
-  }
-
-  Future imgFromGallery() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        print(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  final TextEditingController _anounController = TextEditingController();
-  final TextEditingController _anounTitleController = TextEditingController();
-
+  AnnouncementViewModel anonviewmodel = Get.put(AnnouncementViewModel());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,11 +77,11 @@ class _AnnouncementState extends State<Announcement> {
                                 child: Row(children: [
                                   Expanded(
                                     child: TextFormField(
-                                      decoration: const InputDecoration(
-                                          //contentPadding: EdgeInsets.all(40),
-                                          border: OutlineInputBorder()),
-                                      controller: _anounTitleController,
-                                    ),
+                                        decoration: const InputDecoration(
+                                            //contentPadding: EdgeInsets.all(40),
+                                            border: OutlineInputBorder()),
+                                        controller:
+                                            anonviewmodel.anounTitleController),
                                   ),
                                 ]))),
                         Row(
@@ -150,7 +113,7 @@ class _AnnouncementState extends State<Announcement> {
                                       decoration: const InputDecoration(
                                           //contentPadding: EdgeInsets.all(40),
                                           border: OutlineInputBorder()),
-                                      controller: _anounController,
+                                      controller: anonviewmodel.anounController,
                                     ),
                                   ),
                                 ]))),
@@ -178,21 +141,24 @@ class _AnnouncementState extends State<Announcement> {
                                     const EdgeInsets.only(left: 20.0, top: 10),
                                 child: GestureDetector(
                                   onTap: () {
-                                    _showPicker(context);
+                                    anonviewmodel.showPicker(context);
                                   },
-                                  child: Container(
-                                    child: _image != null
-                                        ? Image.file(
-                                            _image!,
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.fitHeight,
-                                          )
-                                        : Icon(
-                                            size: 50,
-                                            Icons.cloud_upload_outlined,
-                                            color: Colors.grey[800],
-                                          ),
+                                  child: GetBuilder<AnnouncementViewModel>(
+                                    init: AnnouncementViewModel(),
+                                    builder: (value) => Container(
+                                      child: anonviewmodel.image != null
+                                          ? Image.file(
+                                              anonviewmodel.image,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.fitHeight,
+                                            )
+                                          : Icon(
+                                              size: 50,
+                                              Icons.cloud_upload_outlined,
+                                              color: Colors.grey[800],
+                                            ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -202,14 +168,16 @@ class _AnnouncementState extends State<Announcement> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            if (_anounController.text != "") {
-                              final String imageUrl = await uploadFile();
+                            if (anonviewmodel.anounController.text != "") {
+                              final String imageUrl =
+                                  await anonviewmodel.uploadFile();
+
                               AnnouncementController().addAnnouncement(
-                                  _anounController.text,
-                                  _anounTitleController.text,
+                                  anonviewmodel.anounController.text,
+                                  anonviewmodel.anounTitleController.text,
                                   imageUrl);
-                              _anounController.clear();
-                              _anounTitleController.clear();
+                              anonviewmodel.anounController.clear();
+                              anonviewmodel.anounTitleController.clear();
 
                               Get.back();
                             }
@@ -253,34 +221,5 @@ class _AnnouncementState extends State<Announcement> {
         ],
       ),
     );
-  }
-
-  void _showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: Wrap(
-                children: <Widget>[
-                  ListTile(
-                      leading: Icon(Icons.photo_library),
-                      title: Text('Gallery'),
-                      onTap: () {
-                        imgFromGallery();
-                        Get.back();
-                      }),
-                  ListTile(
-                    leading: const Icon(Icons.photo_camera),
-                    title: const Text('Camera'),
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AnnouncementViewModel extends GetxController {
-  String text = '';
   final database = FirebaseDatabase.instance.ref();
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
   File? _image;
   final ImagePicker _picker = ImagePicker();
+  get image => _image;
 
   Future<String> uploadFile() async {
     if (_image == null) return '';
@@ -37,13 +37,44 @@ class AnnouncementViewModel extends GetxController {
     if (pickedFile != null) {
       _image = File(pickedFile.path);
       print(pickedFile.path);
+      update();
     } else {
       print('No image selected.');
     }
   }
 
-  final TextEditingController _anounController = TextEditingController();
-  final TextEditingController _anounTitleController = TextEditingController();
+  void showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Gallery'),
+                      onTap: () {
+                        imgFromGallery();
+
+                        Get.back();
+                      }),
+                  ListTile(
+                    leading: const Icon(Icons.photo_camera),
+                    title: const Text('Camera'),
+                    onTap: () {
+                      Get.back();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  TextEditingController anounController = TextEditingController();
+  TextEditingController anounTitleController = TextEditingController();
   @override
   void onInit() {
     // TODO: implement onInit

@@ -1,8 +1,7 @@
 import 'package:apartment_management_system/Contoller/userController.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_page.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_create_2.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read%20copy.dart';
-import 'package:apartment_management_system/MVVM/VIEW/read.dart';
 import 'package:apartment_management_system/MVVM/VIEW/write.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,12 +31,6 @@ class HomeStudyRT extends GetWidget<AuthController> {
               height: 6,
               width: MediaQuery.of(context).size.width,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Get.to(ChangeNotifierProvider<CafeModel>(
-                      create: (_) => CafeModel(), child: CafeView()));
-                },
-                child: Text('Read with Provider')),
             SizedBox(
               height: 6,
               width: MediaQuery.of(context).size.width,

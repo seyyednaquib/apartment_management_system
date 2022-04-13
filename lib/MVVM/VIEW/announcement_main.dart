@@ -1,5 +1,5 @@
 import 'package:apartment_management_system/Contoller/bindings/root.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_page.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_create_2.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcment_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/belajar_reatltime.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +24,11 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
         onTap: () {
           Get.offAll(Root());
         },
-        child:
-            Icon(Icons.arrow_back_ios_new, color: Color.fromARGB(255, 0, 0, 0)),
+        child: const Icon(Icons.arrow_back_ios_new,
+            color: Color.fromARGB(255, 0, 0, 0)),
       ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      title: Text(
+      title: const Text(
         'Announcement',
         style: TextStyle(color: Colors.black),
       ),
@@ -54,8 +54,7 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
             tileList.addAll(myOrders.map((nextorder) {
               return Card(
                 elevation: 8.0,
-                margin:
-                    new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Color.fromARGB(227, 252, 248, 248)),

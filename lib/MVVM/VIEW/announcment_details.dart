@@ -117,8 +117,10 @@ class AnnouncementDetails extends StatelessWidget {
       ),
     );
     return Scaffold(
-      body: Column(
-        children: <Widget>[topContent, bottomContent],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[topContent, bottomContent],
+        ),
       ),
     );
   }

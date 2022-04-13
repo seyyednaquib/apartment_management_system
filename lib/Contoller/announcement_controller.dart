@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:apartment_management_system/MVVM/VIEW/announcement_page.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/Model/announcement.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
