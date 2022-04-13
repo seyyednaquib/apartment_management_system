@@ -1,12 +1,7 @@
-import 'dart:io';
 import 'package:apartment_management_system/MVVM/VIEWMODEL/announcementViewModel.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:apartment_management_system/Contoller/announcement_controller.dart';
-import 'package:apartment_management_system/Model/announcement.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../Contoller/bindings/root.dart';
 
@@ -154,8 +149,8 @@ class _AnnouncementState extends State<Announcement> {
                                               fit: BoxFit.fitHeight,
                                             )
                                           : Icon(
-                                              size: 50,
                                               Icons.cloud_upload_outlined,
+                                              size: 50,
                                               color: Colors.grey[800],
                                             ),
                                     ),

@@ -1,14 +1,12 @@
 import 'package:apartment_management_system/Contoller/userController.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_create_2.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read%20copy.dart';
 import 'package:apartment_management_system/MVVM/VIEW/write.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../../Contoller/authController.dart';
-import '../../Model/cafe_model.dart';
 
 class HomeStudyRT extends GetWidget<AuthController> {
   const HomeStudyRT({Key? key}) : super(key: key);

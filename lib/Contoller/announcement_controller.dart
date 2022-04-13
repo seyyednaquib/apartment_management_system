@@ -1,10 +1,6 @@
-import 'dart:io';
-
-import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/Model/announcement.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class AnnouncementController extends GetxController {
@@ -39,7 +35,7 @@ class AnnouncementController extends GetxController {
         'title': title,
         'content': content,
         'dateCreated': formattedDate,
-        'ImgUrl': ImgUrl ?? 'http://clipart-library.com/images/8cEjdgeXi.jpg',
+        'ImgUrl': ImgUrl,
       }).then((_) =>
           Get.snackbar("UPLOADED", title, snackPosition: SnackPosition.BOTTOM));
     } catch (e) {

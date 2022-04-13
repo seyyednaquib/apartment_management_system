@@ -34,8 +34,7 @@ class EventController extends GetxController {
         'title': title,
         'content': content,
         'dateCreated': formattedDate,
-        'ImgUrl': ImgUrl ??
-            'https://upload.wikimedia.org/wikipedia/commons/1/14/The_Event_2010_Intertitle.svg',
+        'ImgUrl': ImgUrl
       }).then((_) =>
           Get.snackbar("UPLOADED", title, snackPosition: SnackPosition.BOTTOM));
     } catch (e) {

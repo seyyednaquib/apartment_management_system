@@ -1,7 +1,5 @@
 import 'package:apartment_management_system/Contoller/bindings/root.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_create_2.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcment_details.dart';
-import 'package:apartment_management_system/MVVM/VIEW/belajar_reatltime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
