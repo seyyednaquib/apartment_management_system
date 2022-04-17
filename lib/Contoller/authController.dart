@@ -22,8 +22,11 @@ class AuthController extends GetxController {
       UserCredential authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       //create user in RTDB
-      UserModel _user =
-          UserModel(id: authResult.user?.uid, email: email, name: name);
+      UserModel _user = UserModel(
+          residentId: authResult.user!.uid,
+          rEmail: email,
+          rName: name,
+          rPhone: '');
       await UserController().createNewUser(_user);
       Get.find<UserController>().user = _user;
       Get.offAll(Root());

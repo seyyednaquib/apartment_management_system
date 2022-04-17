@@ -9,7 +9,7 @@ class EventController extends GetxController {
   final _db = FirebaseDatabase.instance.ref();
 
   Stream<List<EventModel>> getEventStream() {
-    final eventStream = _db.child('announcements').orderByKey().onValue;
+    final eventStream = _db.child('events/').orderByKey().onValue;
     final streamToPublish = eventStream.map((event) {
       final eventMap =
           Map<String, dynamic>.from(event.snapshot.value as dynamic);
@@ -24,7 +24,7 @@ class EventController extends GetxController {
   Future<void> addEvent(String content, String title, String ImgUrl) async {
     if (ImgUrl == '') {
       ImgUrl =
-          'https://upload.wikimedia.org/wikipedia/commons/1/14/The_Event_2010_Intertitle.svg';
+          'https://www.kindpng.com/picc/m/421-4219807_news-events-icon-event-logo-png-transparent-png.png';
     }
 
     try {

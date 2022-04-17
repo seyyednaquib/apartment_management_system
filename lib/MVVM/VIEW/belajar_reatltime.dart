@@ -1,8 +1,11 @@
 import 'package:apartment_management_system/Contoller/userController.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
+import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
+import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
+import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
+import 'package:apartment_management_system/MVVM/VIEW/profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read%20copy.dart';
-import 'package:apartment_management_system/MVVM/VIEW/write.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +25,11 @@ class HomeStudyRT extends GetWidget<AuthController> {
           children: [
             GetX<UserController>(
               builder: (_) {
-                return Text(_.user.name ?? 'Loading');
+                return Row(
+                  children: [
+                    Text(_.user.rName ?? 'Loading'),
+                  ],
+                );
               },
             ),
             SizedBox(
@@ -44,15 +51,6 @@ class HomeStudyRT extends GetWidget<AuthController> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Get.to(TestWrite());
-                },
-                child: Text('Test Write')),
-            SizedBox(
-              height: 6,
-              width: MediaQuery.of(context).size.width,
-            ),
-            ElevatedButton(
-                onPressed: () {
                   Get.to(Announcement());
                 },
                 child: Text('Announcements')),
@@ -64,7 +62,43 @@ class HomeStudyRT extends GetWidget<AuthController> {
                 onPressed: () {
                   Get.to(AnnouncementPageMain());
                 },
-                child: Text('New Announcements Page')),
+                child: Text('Announcements Page')),
+            SizedBox(
+              height: 6,
+              width: MediaQuery.of(context).size.width,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(CreateEventPage());
+                },
+                child: Text('Create Event')),
+            SizedBox(
+              height: 6,
+              width: MediaQuery.of(context).size.width,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(EventPageMain());
+                },
+                child: Text('Events Page')),
+            SizedBox(
+              height: 6,
+              width: MediaQuery.of(context).size.width,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(Profile());
+                },
+                child: Text('Update Resident Profile')),
+            SizedBox(
+              height: 6,
+              width: MediaQuery.of(context).size.width,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(() => ComplaintCreate());
+                },
+                child: Text('Create Complaint')),
             SizedBox(
               height: 6,
               width: MediaQuery.of(context).size.width,

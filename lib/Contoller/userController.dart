@@ -18,8 +18,8 @@ class UserController extends GetxController {
     try {
       await _db
           .child('users/')
-          .child('${user.id}/')
-          .set({'name': user.name, 'email': user.email}).then(
+          .child('${user.residentId}/')
+          .set({'name': user.rName, 'email': user.rEmail}).then(
               (_) => print('user Saved'));
     } catch (e) {
       print(e);
@@ -28,7 +28,8 @@ class UserController extends GetxController {
 
   Future<UserModel> getUser(String id) async {
     try {
-      final DataSnapshot userData = await _db.child('users/').child(id).get();
+      final DataSnapshot userData =
+          await _db.child('residents/').child(id).get();
       return UserModel.fromRTDB(userData.value as dynamic);
     } catch (e) {
       print(e);

@@ -1,15 +1,20 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class UserModel {
-  String? id;
-  String? name;
-  String? email;
+  String? residentId;
+  String? rName;
+  String? rPhone;
+  String? rUnit;
+  String? rEmail;
 
-  UserModel({this.id, this.name, this.email});
+  UserModel(
+      {this.residentId, this.rName, this.rPhone, this.rEmail, this.rUnit});
 
   UserModel.fromRTDB(dynamic data) {
-    id = data['id'];
-    name = data['name'];
-    email = data['email'];
+    residentId = data['residentId'];
+    rName = data['rName'];
+    rPhone = data['rphone'];
+    rEmail = data['rEmail'];
+    rUnit = data['rUnit'];
   }
 }
