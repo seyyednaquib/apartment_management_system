@@ -1,3 +1,4 @@
+import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/MVVM/VIEWMODEL/complaintViewModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,23 +25,7 @@ class _ComplaintCreateState extends State<ComplaintCreate> {
         children: <Widget>[
           Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                  title: const Text(
-                    "New Complaint",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  leading: InkWell(
-                    onTap: () {
-                      Get.offAll(Root());
-                    },
-                    child: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.black),
-                  )),
+              appBar: buildAppBar(context, 'New Complaint'),
               body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: SingleChildScrollView(

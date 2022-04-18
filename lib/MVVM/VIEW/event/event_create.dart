@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Contoller/bindings/root.dart';
+import '../widgets/appbar_widget.dart';
 
 class CreateEventPage extends StatefulWidget {
   CreateEventPage({Key? key}) : super(key: key);
@@ -22,23 +23,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
         children: <Widget>[
           Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                  title: const Text(
-                    "New Event",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  leading: InkWell(
-                    onTap: () {
-                      Get.offAll(Root());
-                    },
-                    child: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.black),
-                  )),
+              appBar: buildAppBar(context, 'New Event'),
               body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: SingleChildScrollView(

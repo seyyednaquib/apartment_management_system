@@ -1,3 +1,4 @@
+import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/MVVM/VIEWMODEL/announcementViewModel.dart';
 import 'package:apartment_management_system/Contoller/announcement_controller.dart';
 import 'package:flutter/material.dart';
@@ -22,23 +23,7 @@ class _AnnouncementState extends State<Announcement> {
         children: <Widget>[
           Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                  title: const Text(
-                    "New Announcement",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  leading: InkWell(
-                    onTap: () {
-                      Get.offAll(Root());
-                    },
-                    child: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.black),
-                  )),
+              appBar: buildAppBar(context, 'New Announcement'),
               body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: SingleChildScrollView(

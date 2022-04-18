@@ -1,4 +1,5 @@
 import 'package:apartment_management_system/Model/resident.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,20 @@ class UserController extends GetxController {
     } catch (e) {
       print(e);
       rethrow;
+    }
+  }
+
+  Future<void> updateUser(String name, String phone, String unit) async {
+    try {
+      final uid = await FirebaseAuth.instance.currentUser?.uid;
+      await _db
+          .child('residents/')
+          .child('${uid}/')
+          .update({'rName': name, 'rPhone': phone, 'rUnit': unit}).then(
+              (_) => print('Updated user information'));
+      user = await getUser(uid!);
+    } catch (e) {
+      print(e);
     }
   }
 }
