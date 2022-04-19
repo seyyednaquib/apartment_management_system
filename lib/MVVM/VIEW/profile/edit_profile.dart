@@ -111,7 +111,7 @@ class _EditProfileState extends State<EditProfile> {
                     unitController.text);
                 await UserController().updateUser(nameController.text,
                     phoneController.text, unitController.text);
-                Get.to(() => Profile());
+                Get.off(Profile());
               },
               style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(230, 125, 13, 253),

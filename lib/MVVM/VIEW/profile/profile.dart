@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
                           height: 20,
                         ),
                         Text(
-                          'Seyyed Naquib',
+                          c.user.rName ?? '',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 24),
                         ),
@@ -53,7 +53,7 @@ class _ProfileState extends State<Profile> {
                           height: 4,
                         ),
                         Text(
-                          'naquib@melawis.my',
+                          c.user.rEmail ?? '',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.grey),
                         ),

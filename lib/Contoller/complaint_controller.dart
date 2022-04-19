@@ -29,7 +29,9 @@ class ComplaintController extends GetxController {
     try {
       DateTime now = DateTime.now();
       String formattedDate = DateFormat('yyyy-MM-dd kk:mm').format(now);
-      await _db.child('complaints/').push().set({
+      final String? key = await _db.child('complaints/').push().key;
+      await _db.child('complaints/').child(key!).set({
+        'complaintId': key,
         'residentId': FirebaseAuth.instance.currentUser?.uid,
         'complaintContent': complaintContent,
         'complaintTitle': complaintTitle,

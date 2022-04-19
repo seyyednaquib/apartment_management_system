@@ -12,6 +12,11 @@ class Root extends GetWidget<AuthController> {
     return GetX<AuthController>(
       initState: (_) async {
         Get.put<UserController>(UserController());
+        if (Get.find<AuthController>().user != null) {
+          //get DATA USER BEFORE HOME
+          Get.find<UserController>().user =
+              await UserController().getUser(Get.find<AuthController>().user!);
+        }
       },
       builder: (_) {
         if (Get.find<AuthController>().user != null) {

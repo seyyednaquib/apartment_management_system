@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
+import 'authController.dart';
+
 class UserController extends GetxController {
   Rx<UserModel> _userModel = UserModel().obs;
 
@@ -46,7 +48,8 @@ class UserController extends GetxController {
           .child('${uid}/')
           .update({'rName': name, 'rPhone': phone, 'rUnit': unit}).then(
               (_) => print('Updated user information'));
-      user = await getUser(uid!);
+      Get.find<UserController>().user =
+          await UserController().getUser(Get.find<AuthController>().user!);
     } catch (e) {
       print(e);
     }
