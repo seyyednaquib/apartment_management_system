@@ -22,6 +22,20 @@ class AnnouncementController extends GetxController {
     return streamToPublish;
   }
 
+  Stream<List<AnnouncementModel>> getAnnouncementStreamForHome() {
+    final orderStream =
+        _db.child('announcements').orderByKey().limitToLast(3).onValue;
+    final streamToPublish = orderStream.map((event) {
+      final orderMap =
+          Map<String, dynamic>.from(event.snapshot.value as dynamic);
+      final orderList = orderMap.entries.map((e) {
+        return AnnouncementModel.fromRTDB(Map<String, dynamic>.from(e.value));
+      }).toList();
+      return orderList;
+    });
+    return streamToPublish;
+  }
+
   Future<void> addAnnouncement(
       String content, String title, String ImgUrl) async {
     if (ImgUrl == '') {

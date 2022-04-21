@@ -21,6 +21,20 @@ class EventController extends GetxController {
     return streamToPublish;
   }
 
+  Stream<List<EventModel>> getEventStreamForHome() {
+    final eventStream =
+        _db.child('events/').orderByKey().limitToLast(3).onValue;
+    final streamToPublish = eventStream.map((event) {
+      final eventMap =
+          Map<String, dynamic>.from(event.snapshot.value as dynamic);
+      final eventList = eventMap.entries.map((e) {
+        return EventModel.fromRTDB(Map<String, dynamic>.from(e.value));
+      }).toList();
+      return eventList;
+    });
+    return streamToPublish;
+  }
+
   Future<void> addEvent(String content, String title, String ImgUrl) async {
     if (ImgUrl == '') {
       ImgUrl =

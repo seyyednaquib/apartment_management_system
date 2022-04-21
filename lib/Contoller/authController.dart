@@ -44,7 +44,7 @@ class AuthController extends GetxController {
       Get.find<UserController>().user =
           await UserController().getUser(authResult.user!.uid);
     } catch (e) {
-      Get.snackbar("Eroor Login", 'message',
+      Get.snackbar("Eroor Login", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
     }
   }
