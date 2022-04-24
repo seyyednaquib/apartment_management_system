@@ -1,14 +1,18 @@
 import 'package:apartment_management_system/Contoller/event_controller.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
+import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
+import 'package:apartment_management_system/MVVM/VIEW/services.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
+import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
 import 'package:apartment_management_system/Model/event.dart';
 import 'package:avatars/avatars.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,11 +145,26 @@ class _HomeState extends State<Home> {
                                       height: 100,
                                       width: 344,
                                       decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(28),
-                                          color: Colors.white54),
+                                        border: Border.all(
+                                            width: 0.4, color: Colors.black),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            blurRadius: 4,
+                                            offset:
+                                                Offset(1, 2), // Shadow position
+                                          ),
+                                        ],
+                                        color: Colors.purple,
+                                        gradient: new LinearGradient(
+                                            colors: [
+                                              Color.fromARGB(
+                                                  255, 241, 241, 241),
+                                              Color.fromARGB(255, 230, 229, 229)
+                                            ],
+                                            begin: Alignment.centerRight,
+                                            end: new Alignment(-1.0, -1.0)),
+                                      ),
                                       child: InkWell(
                                           onLongPress: () {
                                             Get.to(() => AnnouncementDetails(
@@ -241,24 +260,26 @@ class _HomeState extends State<Home> {
                                       height: 100,
                                       width: 344,
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(28),
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            stops: [
-                                              0.1,
-                                              0.5,
-                                              0.9,
-                                              1.0,
-                                            ],
+                                        border: Border.all(
+                                            width: 0.4, color: Colors.black),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            blurRadius: 4,
+                                            offset:
+                                                Offset(1, 2), // Shadow position
+                                          ),
+                                        ],
+                                        color: Colors.purple,
+                                        gradient: new LinearGradient(
                                             colors: [
-                                              Color.fromRGBO(102, 167, 197, 1),
-                                              Color.fromRGBO(163, 214, 245, 1),
-                                              Color.fromRGBO(102, 167, 197, 1),
-                                              Color.fromRGBO(102, 167, 197, 1)
+                                              Color.fromARGB(
+                                                  255, 241, 241, 241),
+                                              Color.fromARGB(255, 230, 229, 229)
                                             ],
-                                          )),
+                                            begin: Alignment.centerRight,
+                                            end: new Alignment(-1.0, -1.0)),
+                                      ),
                                       child: InkWell(
                                           onLongPress: () {
                                             Get.to(() => EventDetails(
@@ -336,33 +357,21 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   height: 100,
-                  child: ListView.builder(
+                  child: ListView(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(left: 10, right: 6),
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return Container(
-                          decoration: new BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                                offset: Offset(1, 2), // Shadow position
-                              ),
-                            ],
-                            color: Colors.purple,
-                            gradient: new LinearGradient(
-                                colors: [Colors.red, Colors.cyan],
-                                begin: Alignment.centerRight,
-                                end: new Alignment(-1.0, -1.0)),
-                          ),
-                          height: 100,
-                          width: 100,
-                          margin: EdgeInsets.only(left: 20, right: 20),
-                          child: new FlutterLogo(
-                            size: 200.0,
-                          ));
-                    },
+                    children: [
+                      buildMenuContainer(
+                          context,
+                          'assets/images/announcement.png',
+                          AnnouncementPageMain()),
+                      buildMenuContainer(
+                          context, 'assets/images/event.png', EventPageMain()),
+                      buildMenuContainer(context, 'assets/images/complaint.png',
+                          ComplaintCreate()),
+                      buildMenuContainer(context, 'assets/images/service.png',
+                          ServicePageMain()),
+                    ],
                   ),
                 )
               ],

@@ -14,9 +14,9 @@ class AnnouncementModel {
 
   factory AnnouncementModel.fromRTDB(Map<String, dynamic> data) {
     return AnnouncementModel(
-        content: data['content'] ?? 'drink',
-        title: data['title'] ?? 'UnknownSs',
-        date: data['dateCreated'] ?? 'TIME',
+        content: data['content'] ?? 'unk',
+        title: data['title'] ?? 'unk',
+        date: data['dateCreated'] ?? 'unk',
         ImgUrl: data['ImgUrl'] ??
             'http://clipart-library.com/images/8cEjdgeXi.jpg');
   }
