@@ -356,21 +356,43 @@ class _HomeState extends State<Home> {
                   height: 25,
                 ),
                 Container(
-                  height: 100,
+                  height: 140,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(left: 10, right: 6),
                     children: [
                       buildMenuContainer(
                           context,
                           'assets/images/announcement.png',
-                          AnnouncementPageMain()),
-                      buildMenuContainer(
-                          context, 'assets/images/event.png', EventPageMain()),
+                          AnnouncementPageMain(),
+                          'Announcement'),
+                      buildMenuContainer(context, 'assets/images/event.png',
+                          EventPageMain(), 'Event'),
                       buildMenuContainer(context, 'assets/images/complaint.png',
-                          ComplaintCreate()),
+                          ComplaintCreate(), 'Complaint'),
                       buildMenuContainer(context, 'assets/images/service.png',
-                          ServicePageMain()),
+                          ServicePageMain(), 'Service'),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 140,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      buildMenuContainer(
+                          context,
+                          'assets/images/announcement.png',
+                          AnnouncementPageMain(),
+                          'Announcement'),
+                      buildMenuContainer(context, 'assets/images/event.png',
+                          EventPageMain(), 'Event'),
+                      buildMenuContainer(context, 'assets/images/complaint.png',
+                          ComplaintCreate(), 'Complaint'),
+                      buildMenuContainer(context, 'assets/images/service.png',
+                          ServicePageMain(), 'Service'),
                     ],
                   ),
                 )
