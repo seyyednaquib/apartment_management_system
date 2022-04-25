@@ -35,7 +35,8 @@ class EventController extends GetxController {
     return streamToPublish;
   }
 
-  Future<void> addEvent(String content, String title, String ImgUrl) async {
+  Future<void> addEvent(
+      String content, String title, String ImgUrl, String dateAndTime) async {
     if (ImgUrl == '') {
       ImgUrl =
           'https://www.kindpng.com/picc/m/421-4219807_news-events-icon-event-logo-png-transparent-png.png';
@@ -47,6 +48,7 @@ class EventController extends GetxController {
       await _db.child('events/').push().set({
         'title': title,
         'content': content,
+        'dateAndTime': dateAndTime,
         'dateCreated': formattedDate,
         'ImgUrl': ImgUrl
       }).then((_) =>

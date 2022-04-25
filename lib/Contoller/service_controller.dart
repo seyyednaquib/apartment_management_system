@@ -23,12 +23,13 @@ class ServiceController extends GetxController {
   }
 
   Stream<List<BookServiceModel>> getBookedServiceUser() {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    final serviceStream = _db.child('bookedService/').child(uid!).onValue;
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final serviceStream = _db.child('bookedService/').onValue;
     final streamToPublish = serviceStream.map((event) {
       final serviceMap =
           Map<String, dynamic>.from(event.snapshot.value as dynamic);
       final serviceList = serviceMap.entries.map((e) {
+        print(e.value.toString());
         return BookServiceModel.fromRTDB(Map<String, dynamic>.from(e.value));
       }).toList();
       return serviceList;
@@ -36,19 +37,25 @@ class ServiceController extends GetxController {
     return streamToPublish;
   }
 
-  Future<void> BookAService(
-      String serviceId, String bookindDateAndTime, String residentId) async {
+  Future<void> BookAService(String serviceId, String bookindDateAndTime,
+      String description, String ServiceTitle) async {
+    final residentId = await FirebaseAuth.instance.currentUser?.uid;
     final String? bookingId = await _db.child('bookedService/').push().key;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd kk:mm').format(now);
     try {
       DateTime now = DateTime.now();
       String formattedDate = DateFormat('yyyy-MM-dd kk:mm').format(now);
-      await _db.child('bookedService/').child(bookingId!).push().set({
+      await _db.child('bookedService/').child(bookingId!).set({
         'serviceId': serviceId,
         'bookingId': bookingId,
+        'ServiceTitle': ServiceTitle,
         'residentId': residentId,
         'bookindDateAndTime': bookindDateAndTime,
+        'description': description,
         'status': '',
-      }).then((_) => Get.snackbar("Booked", 'Service',
+        'dateCreated': formattedDate,
+      }).then((_) => Get.snackbar("Booked", ServiceTitle,
           snackPosition: SnackPosition.BOTTOM));
     } catch (e) {
       print(e);

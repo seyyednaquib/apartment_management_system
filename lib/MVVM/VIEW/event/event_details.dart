@@ -11,31 +11,7 @@ class EventDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 40.0),
-        const SizedBox(
-          width: 90.0,
-          child: Divider(color: Colors.green),
-        ),
-        Text(
-          event.title,
-          style: TextStyle(color: Colors.white, fontSize: 45.0),
-        ),
         SizedBox(height: 30.0),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const <Widget>[
-              Expanded(
-                  flex: 2,
-                  child: Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        '-',
-                        style: TextStyle(color: Colors.white),
-                      ))),
-              Expanded(flex: 1, child: Text(''))
-            ],
-          ),
-        ),
       ],
     );
 
@@ -54,8 +30,6 @@ class EventDetails extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.5,
           padding: const EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          decoration:
-              const BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
           child: Center(
             child: topContentText,
           ),
@@ -73,17 +47,18 @@ class EventDetails extends StatelessWidget {
         Positioned(
             left: 40.0,
             bottom: 20.0,
-            child: Text(
-              event.date,
-              style: TextStyle(color: Colors.white),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration:
+                  const BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
+              child: Text(
+                event.dateCreated,
+                style: TextStyle(color: Colors.white),
+              ),
             ))
       ],
     );
 
-    final bottomContentText = Text(
-      event.content,
-      style: TextStyle(fontSize: 18.0),
-    );
     final readButton = const Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       // child: RaisedButton(
@@ -95,12 +70,47 @@ class EventDetails extends StatelessWidget {
     final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      // color: Theme.of(context).primaryColor,
-      padding: const EdgeInsets.all(40.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[bottomContentText, readButton],
-        ),
+      padding: const EdgeInsets.only(left: 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            height: 100,
+            child: Text(
+              event.title.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0), fontSize: 40.0),
+            ),
+          ),
+          Divider(
+            color: Colors.black,
+          ),
+          Container(
+            height: 30,
+            width: 380,
+            child: Text(
+              'DATE AND TIME ' + event.dateAndTime.toUpperCase(),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20.0),
+            ),
+          ),
+          Divider(
+            color: Colors.black,
+          ),
+          Container(
+            height: 200,
+            width: 380,
+            child: Text(
+              event.content,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0), fontSize: 18.0),
+            ),
+          ),
+          readButton
+        ],
       ),
     );
     return Scaffold(

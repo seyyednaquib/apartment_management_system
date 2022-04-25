@@ -2,10 +2,11 @@ import 'package:apartment_management_system/Contoller/event_controller.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
+import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
-import 'package:apartment_management_system/MVVM/VIEW/services.dart';
+import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
 import 'package:apartment_management_system/Model/event.dart';
@@ -48,8 +49,11 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       GestureDetector(
-                          onTap: (() => Get.to(() => Announcement())),
-                          child: Icon(Icons.drag_indicator_outlined)),
+                        onTap: () {
+                          Get.to(() => CreateEventPage());
+                        },
+                        child: new Icon(Icons.notifications, size: 28.0),
+                      ),
                       Avatar(
                         onTap: () => Get.to(() => Profile()),
                         shape: AvatarShape.circle(28),
@@ -145,8 +149,7 @@ class _HomeState extends State<Home> {
                                       height: 100,
                                       width: 344,
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 0.4, color: Colors.black),
+                                        borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.black26,
@@ -186,9 +189,6 @@ class _HomeState extends State<Home> {
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                         color: Colors.white24),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
                                                     image: DecorationImage(
                                                       image: NetworkImage(
                                                           announcement.ImgUrl),
@@ -250,7 +250,8 @@ class _HomeState extends State<Home> {
                             }
                             if (snapshot.hasData) {
                               final events = snapshot.data as List<EventModel>;
-                              events.sort((b, a) => a.date.compareTo(b.date));
+                              events.sort((b, a) =>
+                                  a.dateCreated.compareTo(b.dateCreated));
                               eventContainer.addAll(events.map((event) {
                                 return Padding(
                                   padding:
@@ -260,8 +261,7 @@ class _HomeState extends State<Home> {
                                       height: 100,
                                       width: 344,
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 0.4, color: Colors.black),
+                                        borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.black26,
@@ -300,9 +300,6 @@ class _HomeState extends State<Home> {
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                         color: Colors.white24),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
                                                     image: DecorationImage(
                                                       image: NetworkImage(
                                                           event.ImgUrl),
@@ -333,7 +330,7 @@ class _HomeState extends State<Home> {
                                                     width: 165,
                                                     height: 20,
                                                     child: Text(
-                                                      event.date,
+                                                      event.dateCreated,
                                                       style: GoogleFonts.inter(
                                                           fontSize: 15,
                                                           fontWeight:
@@ -382,17 +379,14 @@ class _HomeState extends State<Home> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      buildMenuContainer(
-                          context,
-                          'assets/images/announcement.png',
-                          AnnouncementPageMain(),
-                          'Announcement'),
-                      buildMenuContainer(context, 'assets/images/event.png',
-                          EventPageMain(), 'Event'),
-                      buildMenuContainer(context, 'assets/images/complaint.png',
-                          ComplaintCreate(), 'Complaint'),
-                      buildMenuContainer(context, 'assets/images/service.png',
-                          ServicePageMain(), 'Service'),
+                      buildMenuContainer(context, 'assets/images/tba.png',
+                          AnnouncementPageMain(), 'tba'),
+                      buildMenuContainer(context, 'assets/images/tba.png',
+                          EventPageMain(), 'tba'),
+                      buildMenuContainer(context, 'assets/images/tba.png',
+                          ComplaintCreate(), 'tba'),
+                      buildMenuContainer(context, 'assets/images/tba.png',
+                          ServicePageMain(), 'tba'),
                     ],
                   ),
                 )

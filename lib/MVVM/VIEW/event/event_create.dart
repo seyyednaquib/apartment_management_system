@@ -71,6 +71,36 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 20.0),
                                     child: Text(
+                                      'Date and Time',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                            child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                        decoration: const InputDecoration(
+                                            //contentPadding: EdgeInsets.all(40),
+                                            border: OutlineInputBorder()),
+                                        controller:
+                                            evenViewModel.eventDateAndTime),
+                                  ),
+                                ]))),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
                                       'Details',
                                       style: TextStyle(
                                         fontSize: 20,
@@ -152,11 +182,14 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   await evenViewModel.uploadFile();
 
                               EventController().addEvent(
-                                  evenViewModel.eventController.text,
-                                  evenViewModel.eventTitleController.text,
-                                  imageUrl);
+                                evenViewModel.eventController.text,
+                                evenViewModel.eventTitleController.text,
+                                imageUrl,
+                                evenViewModel.eventDateAndTime.text,
+                              );
                               evenViewModel.eventController.clear();
                               evenViewModel.eventTitleController.clear();
+                              evenViewModel.eventDateAndTime.clear();
 
                               Get.back();
                             }
@@ -173,6 +206,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        )
                       ],
                     ),
                   ))),

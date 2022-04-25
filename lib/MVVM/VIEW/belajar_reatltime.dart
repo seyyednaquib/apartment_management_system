@@ -6,7 +6,6 @@ import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/edit_profile_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
-import 'package:apartment_management_system/MVVM/VIEW/profile/testProfileStream.dart';
 import 'package:apartment_management_system/MVVM/VIEW/read%20copy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

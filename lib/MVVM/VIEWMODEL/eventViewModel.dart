@@ -74,6 +74,7 @@ class EventViewModel extends GetxController {
 
   TextEditingController eventController = TextEditingController();
   TextEditingController eventTitleController = TextEditingController();
+  TextEditingController eventDateAndTime = TextEditingController();
   @override
   void onInit() {
     // TODO: implement onInit

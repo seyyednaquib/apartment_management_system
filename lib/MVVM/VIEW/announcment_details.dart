@@ -9,25 +9,10 @@ class AnnouncementDetails extends StatelessWidget {
   final AnnouncementModel announcement;
   @override
   Widget build(BuildContext context) {
-    final coursePrice = Container(
-      padding: const EdgeInsets.all(7.0),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(5.0)),
-      child: const Text(
-        '-',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-
     final topContentText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 40.0),
-        const SizedBox(
-          width: 90.0,
-          child: Divider(color: Colors.green),
-        ),
         Text(
           announcement.title,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
@@ -36,17 +21,7 @@ class AnnouncementDetails extends StatelessWidget {
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const <Widget>[
-              Expanded(
-                  flex: 2,
-                  child: Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        '-',
-                        style: TextStyle(color: Colors.white),
-                      ))),
-              Expanded(flex: 1, child: Text(''))
-            ],
+            children: const <Widget>[Expanded(flex: 1, child: Text(''))],
           ),
         ),
       ],

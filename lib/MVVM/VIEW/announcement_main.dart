@@ -30,15 +30,6 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
         'Announcement',
         style: TextStyle(color: Colors.black),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        )
-      ],
     );
 
     final items = [];

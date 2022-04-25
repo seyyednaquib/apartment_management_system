@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Contoller/bindings/root.dart';
+import 'event_create.dart';
 
 class EventPageMain extends StatefulWidget {
   const EventPageMain({Key? key}) : super(key: key);
@@ -33,10 +34,12 @@ class _EventPageMainState extends State<EventPageMain> {
       actions: <Widget>[
         IconButton(
           icon: const Icon(
-            Icons.search,
+            Icons.add,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => CreateEventPage());
+          },
         )
       ],
     );
@@ -47,7 +50,7 @@ class _EventPageMainState extends State<EventPageMain> {
           final tileList = <Card>[];
           if (snapshot.hasData) {
             final allEvents = snapshot.data as List<EventModel>;
-            allEvents.sort((b, a) => a.date.compareTo(b.date));
+            allEvents.sort((b, a) => a.dateCreated.compareTo(b.dateCreated));
             tileList.addAll(allEvents.map((nextEvent) {
               return Card(
                 elevation: 8.0,

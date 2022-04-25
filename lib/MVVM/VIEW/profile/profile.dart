@@ -1,3 +1,5 @@
+import 'package:apartment_management_system/Contoller/authController.dart';
+import 'package:apartment_management_system/Contoller/bindings/root.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/edit_profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/edit_profile_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
@@ -15,6 +17,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   UserController c = Get.put(UserController());
+  AuthController controller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
@@ -136,6 +139,26 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(30))),
                           child: Text(
                             'Update',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.signOut();
+                            Get.offAll(() => Root());
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(230, 145, 145, 145),
+                              fixedSize: const Size(100, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: Text(
+                            'Logout',
                             style: TextStyle(
                               fontSize: 18,
                             ),

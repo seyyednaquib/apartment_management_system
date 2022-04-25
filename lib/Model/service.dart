@@ -12,7 +12,7 @@ class ServiceModel {
 
   factory ServiceModel.fromRTDB(Map<String, dynamic> data) {
     return ServiceModel(
-        serviceId: data['serviceId'] ?? 'unk',
+        serviceId: data['serviceid'] ?? 'unk',
         serviceTitle: data['service'] ?? 'unk',
         content: data['content'] ?? 'unk',
         workingHours: data['workingHours'] ?? 'unk');
@@ -20,15 +20,23 @@ class ServiceModel {
 }
 
 class BookServiceModel {
+  final String bookingId;
+  final String ServiceTitle;
+  final String description;
   final String serviceId;
   final String residentId;
   final String bookindDateAndTime;
   final String status;
+  final String dateCreated;
 
   BookServiceModel(
-      {required this.serviceId,
+      {required this.bookingId,
+      required this.ServiceTitle,
+      required this.description,
+      required this.serviceId,
       required this.residentId,
       required this.bookindDateAndTime,
+      required this.dateCreated,
       required this.status});
 
   factory BookServiceModel.fromRTDB(Map<String, dynamic> data) {
@@ -36,6 +44,10 @@ class BookServiceModel {
         serviceId: data['serviceId'] ?? 'unk',
         residentId: data['residentId'] ?? 'unk',
         bookindDateAndTime: data['bookindDateAndTime'] ?? 'unk',
-        status: data['status'] ?? 'unk');
+        status: data['status'] ?? 'unk',
+        bookingId: data['bookingId'],
+        description: data['description'],
+        ServiceTitle: data['ServiceTitle'],
+        dateCreated: data['dateCreated']);
   }
 }

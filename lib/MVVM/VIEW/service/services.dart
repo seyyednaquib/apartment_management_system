@@ -1,20 +1,16 @@
-import 'package:apartment_management_system/Contoller/bindings/root.dart';
 import 'package:apartment_management_system/Contoller/service_controller.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcment_details.dart';
-import 'package:apartment_management_system/MVVM/VIEW/bookService.dart';
-import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
-import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
+
+import 'package:apartment_management_system/MVVM/VIEW/service/bookService.dart';
+
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
-import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
-import 'package:apartment_management_system/MVVM/VIEW/widgets/menuForServices.dart';
+
 import 'package:apartment_management_system/Model/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Contoller/announcement_controller.dart';
-import '../../Model/announcement.dart';
+import '../../../Contoller/bindings/root.dart';
+import 'my_services_booking.dart';
 
 class ServicePageMain extends StatefulWidget {
   const ServicePageMain({Key? key}) : super(key: key);
@@ -28,7 +24,44 @@ class _ServicePageMainState extends State<ServicePageMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      appBar: buildAppBar(context, 'Services'),
+      appBar: AppBar(
+        title: Text(
+          'Services',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        leading: InkWell(
+          onTap: () {
+            Get.offAll(Root());
+          },
+          child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+        ),
+        actions: [
+          Container(
+            width: 150,
+            height: 100,
+            margin: EdgeInsets.only(top: 10, bottom: 10, right: 10),
+            color: Color.fromARGB(230, 125, 13, 253),
+            child: InkWell(
+                onTap: () {
+                  Get.to(MyBooking());
+                },
+                child: Center(
+                  child: Text(
+                    'My Booking',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15),
+                  ),
+                )),
+          )
+        ],
+      ),
       body: Column(children: [
         Padding(
           padding: const EdgeInsets.only(
@@ -72,11 +105,16 @@ class _ServicePageMainState extends State<ServicePageMain> {
                                 begin: Alignment.centerRight,
                                 end: new Alignment(-1.0, -1.0)),
                           ),
-                          height: 100,
-                          width: 100,
+                          height: 90,
+                          width: 90,
                           margin: EdgeInsets.only(top: 15, bottom: 15),
                           child: InkWell(
-                            onTap: (() => Get.to(() => BookService())),
+                            onTap: (() => Get.to(() => BookService(
+                                  serviceId: nextorder.serviceId,
+                                  content: nextorder.content,
+                                  serviceTitle: nextorder.serviceTitle,
+                                  workingHours: nextorder.workingHours,
+                                ))),
                             child: Stack(children: [
                               Positioned(
                                 top: 0,
@@ -84,8 +122,8 @@ class _ServicePageMainState extends State<ServicePageMain> {
                                 child: (Image(
                                   image:
                                       AssetImage('assets/images/service.png'),
-                                  height: 100,
-                                  width: 100,
+                                  height: 90,
+                                  width: 90,
                                 )),
                               ),
                               Positioned(
@@ -99,16 +137,7 @@ class _ServicePageMainState extends State<ServicePageMain> {
                                         color: Colors.black)),
                               ),
                               Positioned(
-                                top: 40,
-                                left: 10,
-                                child: Text(nextorder.content,
-                                    style: GoogleFonts.inter(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300,
-                                        color: Colors.black)),
-                              ),
-                              Positioned(
-                                top: 70,
+                                top: 60,
                                 left: 10,
                                 child: Text(nextorder.workingHours,
                                     style: GoogleFonts.inter(
