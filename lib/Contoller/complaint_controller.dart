@@ -12,11 +12,12 @@ class ComplaintController extends GetxController {
   final _db = FirebaseDatabase.instance.ref();
 
   Stream<List<ComplaintModel>> getComplaintStream() {
-    final orderStream = _db.child('complaints').orderByKey().onValue;
+    final orderStream = _db.child('complaints/').orderByKey().onValue;
     final streamToPublish = orderStream.map((event) {
       final orderMap =
           Map<String, dynamic>.from(event.snapshot.value as dynamic);
       final orderList = orderMap.entries.map((e) {
+        print(e.value.toString());
         return ComplaintModel.fromRTDB(Map<String, dynamic>.from(e.value));
       }).toList();
       return orderList;
@@ -36,6 +37,7 @@ class ComplaintController extends GetxController {
         'complaintContent': complaintContent,
         'complaintTitle': complaintTitle,
         'dateCreated': formattedDate,
+        'ComplaintRespond': '',
       }).then((_) => Get.snackbar("UPLOADED", complaintTitle,
           snackPosition: SnackPosition.BOTTOM));
     } catch (e) {

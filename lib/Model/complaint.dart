@@ -6,12 +6,15 @@ class ComplaintModel {
   final String complaintContent;
   final String complaintTitle;
   final String dateCreated;
+  final String complaintRespond;
+
   ComplaintModel(
       {required this.complaintId,
       required this.residentId,
       required this.complaintContent,
       required this.complaintTitle,
-      required this.dateCreated});
+      required this.dateCreated,
+      required this.complaintRespond});
 
   factory ComplaintModel.fromRTDB(Map<String, dynamic> data) {
     return ComplaintModel(
@@ -19,6 +22,7 @@ class ComplaintModel {
         residentId: data['residentId'] ?? 'unknown',
         complaintContent: data['complaintContent'] ?? 'unknown',
         complaintTitle: data['complaintTitle'] ?? 'unknown',
-        dateCreated: data['dateCreated'] ?? 'unknown');
+        dateCreated: data['dateCreated'] ?? 'unknown',
+        complaintRespond: data['ComplaintRespond'] ?? 'unk');
   }
 }

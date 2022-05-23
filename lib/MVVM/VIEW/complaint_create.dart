@@ -25,7 +25,23 @@ class _ComplaintCreateState extends State<ComplaintCreate> {
         children: <Widget>[
           Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: buildAppBar(context, 'New Complaint'),
+              appBar: AppBar(
+                  title: Text(
+                    'New Complaint',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  leading: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: const Icon(Icons.arrow_back_ios_new,
+                        color: Colors.black),
+                  )),
               body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: SingleChildScrollView(

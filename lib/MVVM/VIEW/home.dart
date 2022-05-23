@@ -1,26 +1,25 @@
 import 'package:apartment_management_system/Contoller/event_controller.dart';
-import 'package:apartment_management_system/MVVM/VIEW/announcement_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/announcement_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
+import 'package:apartment_management_system/MVVM/VIEW/complaint_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
+import 'package:apartment_management_system/MVVM/VIEW/nearest_local_store.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
-import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
 import 'package:apartment_management_system/Model/event.dart';
 import 'package:avatars/avatars.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Contoller/announcement_controller.dart';
 import '../../Contoller/userController.dart';
 import '../../Model/announcement.dart';
+import 'announcement_create.dart';
 import 'announcment_details.dart';
 
 class Home extends StatefulWidget {
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => CreateEventPage());
+                          Get.to(() => Announcement());
                         },
                         child: new Icon(Icons.notifications, size: 28.0),
                       ),
@@ -365,7 +364,7 @@ class _HomeState extends State<Home> {
                       buildMenuContainer(context, 'assets/images/event.png',
                           EventPageMain(), 'Event'),
                       buildMenuContainer(context, 'assets/images/complaint.png',
-                          ComplaintCreate(), 'Complaint'),
+                          MyComplaint(), 'Complaint'),
                       buildMenuContainer(context, 'assets/images/service.png',
                           ServicePageMain(), 'Service'),
                     ],
@@ -380,7 +379,7 @@ class _HomeState extends State<Home> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       buildMenuContainer(context, 'assets/images/tba.png',
-                          AnnouncementPageMain(), 'tba'),
+                          NearestLocalStore(), 'Local Store'),
                       buildMenuContainer(context, 'assets/images/tba.png',
                           EventPageMain(), 'tba'),
                       buildMenuContainer(context, 'assets/images/tba.png',

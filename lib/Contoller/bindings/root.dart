@@ -11,7 +11,6 @@ class Root extends GetWidget<AuthController> {
   void getUser() async {
     Get.find<UserController>().user =
         await UserController().getUser(Get.find<AuthController>().user!);
-    print('User in return =' + Get.find<AuthController>().user!);
   }
 
   @override

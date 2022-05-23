@@ -49,6 +49,8 @@ dependencies:
   bubble_tab_indicator: ^0.1.6
   firebase_messaging: ^11.2.14
   date_time_picker: ^2.1.0
+  flutter_local_notifications: ^9.5.3+1
+  firebase_analytics: ^9.1.8
 
 dev_dependencies:
   flutter_test:
