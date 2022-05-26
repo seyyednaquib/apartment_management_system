@@ -5,9 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print("this massage from bg");
+
+  if (message.data.isEmpty) {
+    print(message.notification!.title);
+    print(message.notification!.body);
+  } else
+    print(message.data['route']);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   runApp(const MyApp());
 }
 
@@ -45,5 +56,5 @@ class _MyAppState extends State<MyApp> {
 //for notifications purposes
 getToken() async {
   String? token = await FirebaseMessaging.instance.getToken();
-  print(token! + 'token ni bosq');
+  print(token! + ' token ni bosq');
 }

@@ -5,6 +5,7 @@ import 'package:apartment_management_system/MVVM/VIEW/complaint_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
+import 'package:apartment_management_system/MVVM/VIEW/local_notification.dart';
 import 'package:apartment_management_system/MVVM/VIEW/nearest_local_store.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
@@ -12,6 +13,7 @@ import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widg
 import 'package:apartment_management_system/Model/event.dart';
 import 'package:avatars/avatars.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +32,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //NOTIF
+  String notif = 'beloman';
+  void initState() {
+    super.initState();
+    LocalNotificationService.initialize();
+    FirebaseMessaging.instance.getInitialMessage().then((event) {
+      if (event != null) {
+        setState(() {
+          notif =
+              "${event.notification!.title} ${event.notification!.body} from terminated state";
+        });
+        if (event.data['route'] == 'announcement') Get.to(() => Announcement());
+      }
+    });
+    FirebaseMessaging.onMessage.listen((event) {
+      LocalNotificationService.showNotificationOnForeground(event);
+      setState(() {
+        notif =
+            "${event.notification!.title} ${event.notification!.body} from foreground";
+      });
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      setState(() {
+        notif =
+            "${event.notification!.title} ${event.notification!.body} from background";
+      });
+      if (event.data['route'] == 'announcement') Get.to(() => Announcement());
+    });
+  }
+
+  //NOTIF
   UserController c = Get.put(UserController());
   int choosen_index = 0;
   final String message =
@@ -66,6 +99,10 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(child: Text(notif)),
                 SizedBox(
                   height: 25,
                 ),
