@@ -8,6 +8,7 @@ import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/local_notification.dart';
 import 'package:apartment_management_system/MVVM/VIEW/nearest_local_store.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
+import 'package:apartment_management_system/MVVM/VIEW/service/my_services_booking.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
 import 'package:apartment_management_system/Model/event.dart';
@@ -43,7 +44,24 @@ class _HomeState extends State<Home> {
           notif =
               "${event.notification!.title} ${event.notification!.body} from terminated state";
         });
-        if (event.data['route'] == 'announcement') Get.to(() => Announcement());
+        //Terminated Link
+        switch (event.data['route']) {
+          case 'announcement':
+            {
+              Get.to(() => AnnouncementPageMain());
+            }
+            break;
+          case 'mycomplaint':
+            {
+              Get.to(() => MyComplaint());
+            }
+            break;
+          case 'myservice':
+            {
+              Get.to(() => MyBooking());
+            }
+            break;
+        }
       }
     });
     FirebaseMessaging.onMessage.listen((event) {
@@ -58,7 +76,24 @@ class _HomeState extends State<Home> {
         notif =
             "${event.notification!.title} ${event.notification!.body} from background";
       });
-      if (event.data['route'] == 'announcement') Get.to(() => Announcement());
+      //Background Link
+      switch (event.data['route']) {
+        case 'announcement':
+          {
+            Get.to(() => AnnouncementPageMain());
+          }
+          break;
+        case 'mycomplaint':
+          {
+            Get.to(() => MyComplaint());
+          }
+          break;
+        case 'myservice':
+          {
+            Get.to(() => MyBooking());
+          }
+          break;
+      }
     });
   }
 
@@ -415,7 +450,7 @@ class _HomeState extends State<Home> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      buildMenuContainer(context, 'assets/images/tba.png',
+                      buildMenuContainer(context, 'assets/images/store.png',
                           NearestLocalStore(), 'Local Store'),
                       buildMenuContainer(context, 'assets/images/tba.png',
                           EventPageMain(), 'tba'),

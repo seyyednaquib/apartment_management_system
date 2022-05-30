@@ -1,13 +1,9 @@
 import 'package:apartment_management_system/Contoller/complaint_controller.dart';
-import 'package:apartment_management_system/Contoller/service_controller.dart';
+
 import 'package:apartment_management_system/MVVM/VIEW/complaint_create.dart';
 
-import 'package:apartment_management_system/MVVM/VIEW/service/bookService.dart';
-
-import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/Model/complaint.dart';
 
-import 'package:apartment_management_system/Model/service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +20,7 @@ class _MyComplaintState extends State<MyComplaint> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
+    print('From Bg' + uid);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(

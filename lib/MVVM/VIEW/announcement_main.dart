@@ -32,7 +32,6 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
       ),
     );
 
-    final items = [];
     final makeBody = StreamBuilder(
         stream: AnnouncementController().getAnnouncementStream(),
         builder: (context, snapshot) {
@@ -100,33 +99,6 @@ class _AnnouncementPageMainState extends State<AnnouncementPageMain> {
               children: tileList);
         });
 
-    final makeBottom = Container(
-      height: 55.0,
-      child: BottomAppBar(
-        color: Color.fromRGBO(58, 66, 86, 1.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.home, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.blur_on, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.hotel, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.account_box, color: Colors.white),
-              onPressed: () {},
-            )
-          ],
-        ),
-      ),
-    );
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: topAppBar,

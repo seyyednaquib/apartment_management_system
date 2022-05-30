@@ -51,6 +51,7 @@ dependencies:
   date_time_picker: ^2.1.0
   flutter_local_notifications: ^9.1.5
   firebase_analytics: ^9.1.8
+  maps_launcher: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,13 @@
+import 'package:apartment_management_system/MVVM/VIEW/service/my_services_booking.dart';
+import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
 import 'announcement_create.dart';
+import 'announcement_main.dart';
+import 'complaint_main.dart';
+import 'event/event_main.dart';
 
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
@@ -14,7 +19,23 @@ class LocalNotificationService {
             android: AndroidInitializationSettings("@mipmap/ic_launcher"));
     _notificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) {
-      if (payload == 'announcement') Get.to(() => Announcement());
+      switch (payload) {
+        case 'announcement':
+          {
+            Get.to(() => AnnouncementPageMain());
+          }
+          break;
+        case 'mycomplaint':
+          {
+            Get.to(() => MyComplaint());
+          }
+          break;
+        case 'myservice':
+          {
+            Get.to(() => MyBooking());
+          }
+          break;
+      }
     });
   }
 
