@@ -90,7 +90,18 @@ class EventDetails extends StatelessWidget {
             height: 30,
             width: 380,
             child: Text(
-              'DATE AND TIME ' + event.dateAndTime.toUpperCase(),
+              'START ' + event.dateAndTime.toUpperCase(),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20.0),
+            ),
+          ),
+          Container(
+            height: 30,
+            width: 380,
+            child: Text(
+              'END     ' + event.dateAndTimeEnd.toUpperCase(),
               style: TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.w300,

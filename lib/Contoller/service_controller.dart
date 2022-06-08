@@ -1,4 +1,5 @@
 import 'package:apartment_management_system/Model/announcement.dart';
+import 'package:apartment_management_system/Model/work_permit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class ServiceController extends GetxController {
     return streamToPublish;
   }
 
-  Stream<List<BookServiceModel>> getBookedServiceUser() {
+  Stream<List<WorkPermitModel>> getBookedServiceUser() {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final serviceStream = _db.child('bookedService/').onValue;
     final streamToPublish = serviceStream.map((event) {
@@ -30,7 +31,7 @@ class ServiceController extends GetxController {
           Map<String, dynamic>.from(event.snapshot.value as dynamic);
       final serviceList = serviceMap.entries.map((e) {
         print(e.value.toString());
-        return BookServiceModel.fromRTDB(Map<String, dynamic>.from(e.value));
+        return WorkPermitModel.fromRTDB(Map<String, dynamic>.from(e.value));
       }).toList();
       return serviceList;
     });

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:apartment_management_system/Model/event.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -35,8 +36,8 @@ class EventController extends GetxController {
     return streamToPublish;
   }
 
-  Future<void> addEvent(
-      String content, String title, String ImgUrl, String dateAndTime) async {
+  Future<void> addEvent(String content, String title, String ImgUrl,
+      String dateAndTime, String dateAndTimeEnd) async {
     if (ImgUrl == '') {
       ImgUrl =
           'https://www.kindpng.com/picc/m/421-4219807_news-events-icon-event-logo-png-transparent-png.png';
@@ -45,10 +46,13 @@ class EventController extends GetxController {
     try {
       DateTime now = DateTime.now();
       String formattedDate = DateFormat('yyyy-MM-dd kk:mm').format(now);
+      final residentId = await FirebaseAuth.instance.currentUser?.uid;
       await _db.child('events/').push().set({
         'title': title,
         'content': content,
-        'dateAndTime': dateAndTime,
+        'dateAndTimeStart': dateAndTime,
+        'dateAndTimeEnd': dateAndTimeEnd,
+        'residentId': residentId,
         'dateCreated': formattedDate,
         'ImgUrl': ImgUrl
       }).then((_) =>

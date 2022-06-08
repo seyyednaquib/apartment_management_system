@@ -79,7 +79,7 @@ class _EventPageMainState extends State<EventPageMain> {
                         ),
                       ),
                       subtitle: const Text(
-                        'Management',
+                        'Resident',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,

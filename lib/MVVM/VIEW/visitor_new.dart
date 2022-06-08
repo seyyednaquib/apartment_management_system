@@ -1,46 +1,26 @@
-import 'package:apartment_management_system/Contoller/service_controller.dart';
-
+import 'package:apartment_management_system/Contoller/event_controller.dart';
+import 'package:apartment_management_system/Contoller/visitor_controller.dart';
+import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
+import 'package:apartment_management_system/MVVM/VIEWMODEL/eventViewModel.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../Contoller/bindings/root.dart';
+import '../../../Contoller/bindings/root.dart';
 
-class BookService extends StatefulWidget {
-  final String serviceId;
-  final String serviceTitle;
-  final String content;
-  final String workingHours;
-  BookService(
-      {Key? key,
-      required this.serviceId,
-      required this.serviceTitle,
-      required this.content,
-      required this.workingHours})
-      : super(key: key);
+class NewVistior extends StatefulWidget {
+  NewVistior({Key? key}) : super(key: key);
 
   @override
-  State<BookService> createState() => _BookServiceState();
+  State<NewVistior> createState() => _NewVistiorState();
 }
 
-class _BookServiceState extends State<BookService> {
-  TextEditingController detailController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TimeOfDay selectedTime = TimeOfDay.now();
-  _selectTime(BuildContext context) async {
-    final TimeOfDay? timeOfDay = await showTimePicker(
-      context: context,
-      initialTime: selectedTime,
-      initialEntryMode: TimePickerEntryMode.dial,
-    );
-    if (timeOfDay != null && timeOfDay != selectedTime) {
-      setState(() {
-        selectedTime = timeOfDay;
-      });
-    }
-  }
+class _NewVistiorState extends State<NewVistior> {
+  EventViewModel evenViewModel = Get.put(EventViewModel());
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController icpassport = TextEditingController();
+  final TextEditingController expectedTime = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -48,48 +28,13 @@ class _BookServiceState extends State<BookService> {
         children: <Widget>[
           Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                  title: Text(
-                    widget.serviceTitle,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  leading: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.black),
-                  )),
+              appBar: buildAppBar(context, 'New Vistior'),
               body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          height: 100,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                  width: 1.0, color: Colors.black54)),
-                          child: SingleChildScrollView(
-                            child: Text(widget.content,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 16)),
-                          ),
-                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -101,7 +46,36 @@ class _BookServiceState extends State<BookService> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 20.0),
                                     child: Text(
-                                      'Select Date',
+                                      'Name',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                            child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                        decoration: const InputDecoration(
+                                            //contentPadding: EdgeInsets.all(40),
+                                            border: OutlineInputBorder()),
+                                        controller: nameController),
+                                  ),
+                                ]))),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      'Expected Entry Time',
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -117,14 +91,8 @@ class _BookServiceState extends State<BookService> {
                               type: DateTimePickerType.dateTimeSeparate,
                               firstDate: DateTime(2022),
                               lastDate: DateTime(2100),
-                              controller: dateController,
+                              controller: expectedTime,
                               selectableDayPredicate: (date) {
-                                // Disable weekend days to select from the calendar
-                                if (date.weekday == 6) {
-                                  if (widget.workingHours
-                                      .contains('SUN-FRIDAY')) return false;
-                                }
-
                                 return true;
                               },
                               decoration: InputDecoration(
@@ -138,6 +106,9 @@ class _BookServiceState extends State<BookService> {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: const <Widget>[
@@ -146,7 +117,7 @@ class _BookServiceState extends State<BookService> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 20.0),
                                     child: Text(
-                                      'NOTE',
+                                      'IC/Passport',
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -161,14 +132,10 @@ class _BookServiceState extends State<BookService> {
                                 child: Row(children: [
                                   Expanded(
                                     child: TextFormField(
-                                      minLines: 3,
-                                      maxLines: 5,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: const InputDecoration(
-                                          //contentPadding: EdgeInsets.all(40),
-                                          border: OutlineInputBorder()),
-                                      controller: detailController,
-                                    ),
+                                        decoration: const InputDecoration(
+                                            //contentPadding: EdgeInsets.all(40),
+                                            border: OutlineInputBorder()),
+                                        controller: icpassport),
                                   ),
                                 ]))),
                         const SizedBox(
@@ -176,13 +143,15 @@ class _BookServiceState extends State<BookService> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            if (detailController.text != ' ' &&
-                                dateController.text != ' ') {
-                              ServiceController().BookAService(
-                                  widget.serviceId,
-                                  dateController.text,
-                                  detailController.text,
-                                  widget.serviceTitle);
+                            final now = DateTime.now();
+                            bool a = await DateTime.parse(expectedTime.text)
+                                .isBefore(now);
+
+                            if (DateTime.parse(expectedTime.text)
+                                    .isBefore(now) &&
+                                nameController.text != "") {
+                              VistiorController().NewVistior(expectedTime.text,
+                                  icpassport.text, nameController.text);
                               Get.back();
                             }
                           },
@@ -192,12 +161,15 @@ class _BookServiceState extends State<BookService> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const Text(
-                            'Book',
+                            'Submit',
                             style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        )
                       ],
                     ),
                   ))),

@@ -1,5 +1,6 @@
 import 'package:apartment_management_system/Contoller/event_controller.dart';
 import 'package:apartment_management_system/MVVM/VIEWMODEL/eventViewModel.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,11 @@ class CreateEventPage extends StatefulWidget {
 class _CreateEventPageState extends State<CreateEventPage> {
   EventViewModel evenViewModel = Get.put(EventViewModel());
   @override
+  final TextEditingController eventDateAndTimeController =
+      TextEditingController();
+  final TextEditingController eventEndDateTimeController =
+      TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -71,7 +77,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 20.0),
                                     child: Text(
-                                      'Date and Time',
+                                      'Start Date Time',
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -80,19 +86,71 @@ class _CreateEventPageState extends State<CreateEventPage> {
                           ],
                         ),
                         Container(
-                            margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                            child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                        decoration: const InputDecoration(
-                                            //contentPadding: EdgeInsets.all(40),
-                                            border: OutlineInputBorder()),
-                                        controller:
-                                            evenViewModel.eventDateAndTime),
-                                  ),
-                                ]))),
+                          margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: DateTimePicker(
+                              type: DateTimePickerType.dateTimeSeparate,
+                              firstDate: DateTime(2022),
+                              lastDate: DateTime(2100),
+                              controller: eventDateAndTimeController,
+                              selectableDayPredicate: (date) {
+                                // Disable weekend days to select from the calendar
+
+                                return true;
+                              },
+                              decoration: InputDecoration(
+                                  //contentPadding: EdgeInsets.all(40),
+                                  border: OutlineInputBorder()),
+                              onChanged: (val) => print('onchange' + val),
+                              validator: (val) {
+                                print(val);
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 20.0),
+                                    child: Text(
+                                      'End Date Time',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: DateTimePicker(
+                              type: DateTimePickerType.dateTimeSeparate,
+                              firstDate: DateTime(2022),
+                              lastDate: DateTime(2100),
+                              controller: eventEndDateTimeController,
+                              selectableDayPredicate: (date) {
+                                // Disable weekend days to select from the calendar
+
+                                return true;
+                              },
+                              decoration: InputDecoration(
+                                  //contentPadding: EdgeInsets.all(40),
+                                  border: OutlineInputBorder()),
+                              onChanged: (val) => print('onchange' + val),
+                              validator: (val) {
+                                print(val);
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: const <Widget>[
@@ -182,11 +240,11 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   await evenViewModel.uploadFile();
 
                               EventController().addEvent(
-                                evenViewModel.eventController.text,
-                                evenViewModel.eventTitleController.text,
-                                imageUrl,
-                                evenViewModel.eventDateAndTime.text,
-                              );
+                                  evenViewModel.eventController.text,
+                                  evenViewModel.eventTitleController.text,
+                                  imageUrl,
+                                  eventDateAndTimeController.text,
+                                  eventEndDateTimeController.text);
                               evenViewModel.eventController.clear();
                               evenViewModel.eventTitleController.clear();
                               evenViewModel.eventDateAndTime.clear();
@@ -200,7 +258,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const Text(
-                            'Announce',
+                            'POST',
                             style: TextStyle(
                               fontSize: 18,
                             ),

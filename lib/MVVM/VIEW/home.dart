@@ -10,7 +10,9 @@ import 'package:apartment_management_system/MVVM/VIEW/nearest_local_store.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/my_services_booking.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
+import 'package:apartment_management_system/MVVM/VIEW/visitor_new.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/menuContainer_widget.dart';
+import 'package:apartment_management_system/MVVM/VIEW/workPermit_my.dart';
 import 'package:apartment_management_system/Model/event.dart';
 import 'package:avatars/avatars.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
@@ -18,6 +20,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../Contoller/announcement_controller.dart';
 import '../../Contoller/userController.dart';
@@ -61,6 +64,10 @@ class _HomeState extends State<Home> {
               Get.to(() => MyBooking());
             }
             break;
+          case 'MyWorkPermit':
+            {
+              Get.to(() => MyWorkPermit());
+            }
         }
       }
     });
@@ -93,6 +100,10 @@ class _HomeState extends State<Home> {
             Get.to(() => MyBooking());
           }
           break;
+        case 'MyWorkPermit':
+          {
+            Get.to(() => MyWorkPermit());
+          }
       }
     });
   }
@@ -100,10 +111,19 @@ class _HomeState extends State<Home> {
   //NOTIF
   UserController c = Get.put(UserController());
   int choosen_index = 0;
-  final String message =
-      DateTime.now().hour < 12 ? "Good morning" : "Good afternoon";
+  int hours = DateTime.now().hour;
   @override
   Widget build(BuildContext context) {
+    String message = hours.toString();
+    if (hours >= 0 && hours <= 12) {
+      message = "Good Morning";
+    } else if (hours >= 12 && hours <= 16) {
+      message = "Good Afternoon";
+    } else if (hours >= 16 && hours <= 21) {
+      message = "Good Evening";
+    } else if (hours >= 21 && hours <= 24) {
+      message = "Good Night";
+    }
     return Obx(() => Scaffold(
           body: Container(
             margin: EdgeInsets.only(top: 8),
@@ -113,14 +133,8 @@ class _HomeState extends State<Home> {
                 Container(
                   margin: EdgeInsets.only(left: 16, right: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => Announcement());
-                        },
-                        child: new Icon(Icons.notifications, size: 28.0),
-                      ),
                       Avatar(
                         onTap: () => Get.to(() => Profile()),
                         shape: AvatarShape.circle(28),
@@ -134,13 +148,13 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Center(child: Text(notif)),
-                SizedBox(
-                  height: 25,
-                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Center(child: Text(notif)),
+                // SizedBox(
+                //   height: 25,
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, bottom: 16),
                   child: Column(
@@ -425,20 +439,17 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   height: 140,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+                  child: Row(
                     children: [
                       buildMenuContainer(
                           context,
-                          'assets/images/announcement.png',
-                          AnnouncementPageMain(),
-                          'Announcement'),
+                          'assets/images/copywriter.png',
+                          NewVistior(),
+                          'Visitor'),
                       buildMenuContainer(context, 'assets/images/event.png',
                           EventPageMain(), 'Event'),
                       buildMenuContainer(context, 'assets/images/complaint.png',
                           MyComplaint(), 'Complaint'),
-                      buildMenuContainer(context, 'assets/images/service.png',
-                          ServicePageMain(), 'Service'),
                     ],
                   ),
                 ),
@@ -447,17 +458,14 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   height: 140,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+                  child: Row(
                     children: [
                       buildMenuContainer(context, 'assets/images/store.png',
                           NearestLocalStore(), 'Local Store'),
-                      buildMenuContainer(context, 'assets/images/tba.png',
-                          EventPageMain(), 'tba'),
-                      buildMenuContainer(context, 'assets/images/tba.png',
-                          ComplaintCreate(), 'tba'),
-                      buildMenuContainer(context, 'assets/images/tba.png',
-                          ServicePageMain(), 'tba'),
+                      buildMenuContainer(context, 'assets/images/suitcase.png',
+                          MyWorkPermit(), 'Work Permit'),
+                      buildMenuContainer(context, 'assets/images/service.png',
+                          ServicePageMain(), 'Service'),
                     ],
                   ),
                 )

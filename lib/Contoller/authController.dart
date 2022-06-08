@@ -1,4 +1,5 @@
 import 'package:apartment_management_system/Contoller/userController.dart';
+import 'package:apartment_management_system/MVVM/VIEW/announcement_after_login.dart';
 import 'package:apartment_management_system/Model/resident.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +44,7 @@ class AuthController extends GetxController {
       print('Trying To loGin ' + authResult.user!.uid);
       Get.find<UserController>().user =
           await UserController().getUser(authResult.user!.uid);
+      Get.to(() => AnnouncementImportant());
     } catch (e) {
       Get.snackbar("Eroor Login", e.toString(),
           snackPosition: SnackPosition.BOTTOM);

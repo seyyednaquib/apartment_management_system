@@ -1,5 +1,6 @@
 import 'package:apartment_management_system/MVVM/VIEW/service/my_services_booking.dart';
 import 'package:apartment_management_system/MVVM/VIEW/service/services.dart';
+import 'package:apartment_management_system/MVVM/VIEW/workPermit_my.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,10 @@ class LocalNotificationService {
             Get.to(() => MyBooking());
           }
           break;
+        case 'MyWorkPermit':
+          {
+            Get.to(() => MyWorkPermit());
+          }
       }
     });
   }

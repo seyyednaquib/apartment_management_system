@@ -52,6 +52,7 @@ dependencies:
   flutter_local_notifications: ^9.1.5
   firebase_analytics: ^9.1.8
   maps_launcher: ^2.0.1
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:

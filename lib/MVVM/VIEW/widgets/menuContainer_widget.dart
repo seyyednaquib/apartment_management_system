@@ -23,16 +23,16 @@ Container buildMenuContainer(
                 Color.fromARGB(255, 230, 229, 229)
               ], begin: Alignment.centerRight, end: new Alignment(-1.0, -1.0)),
             ),
-            height: 100,
-            width: 100,
+            height: 97,
+            width: 97,
             margin: EdgeInsets.only(left: 20, right: 20),
             child: Column(children: [
               InkWell(
                 onTap: (() => Get.to(navigatTo)),
                 child: (Image(
                   image: AssetImage(asset),
-                  height: 100,
-                  width: 100,
+                  height: 97,
+                  width: 97,
                 )),
               ),
             ])),

@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
                           shape: AvatarShape.circle(48),
                           name: c.user.rName ?? 'U M',
                           placeholderColors: [
-                            Color.fromARGB(255, 255, 255, 255),
+                            Color.fromARGB(255, 39, 28, 28),
                             Color.fromARGB(230, 125, 13, 253),
                             //...
                           ],
