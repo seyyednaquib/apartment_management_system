@@ -53,6 +53,7 @@ dependencies:
   firebase_analytics: ^9.1.8
   maps_launcher: ^2.0.1
   url_launcher: ^6.1.2
+  jiffy: ^5.0.0
 
 dev_dependencies:
   flutter_test:

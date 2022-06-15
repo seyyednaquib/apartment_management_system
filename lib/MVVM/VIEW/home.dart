@@ -5,6 +5,7 @@ import 'package:apartment_management_system/MVVM/VIEW/complaint_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_create.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_details.dart';
 import 'package:apartment_management_system/MVVM/VIEW/event/event_main.dart';
+import 'package:apartment_management_system/MVVM/VIEW/forum/forum_main.dart';
 import 'package:apartment_management_system/MVVM/VIEW/local_notification.dart';
 import 'package:apartment_management_system/MVVM/VIEW/nearest_local_store.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
@@ -446,8 +447,11 @@ class _HomeState extends State<Home> {
                           'assets/images/copywriter.png',
                           NewVistior(),
                           'Visitor'),
-                      buildMenuContainer(context, 'assets/images/event.png',
-                          EventPageMain(), 'Event'),
+                      buildMenuContainer(
+                          context,
+                          'assets/images/discussion.png',
+                          ForumPageMain(),
+                          'Forum'),
                       buildMenuContainer(context, 'assets/images/complaint.png',
                           MyComplaint(), 'Complaint'),
                     ],
@@ -461,7 +465,7 @@ class _HomeState extends State<Home> {
                   child: Row(
                     children: [
                       buildMenuContainer(context, 'assets/images/store.png',
-                          NearestLocalStore(), 'Local Store'),
+                          NearestLocalStore(), 'Nearest Store'),
                       buildMenuContainer(context, 'assets/images/suitcase.png',
                           MyWorkPermit(), 'Work Permit'),
                       buildMenuContainer(context, 'assets/images/service.png',

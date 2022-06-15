@@ -144,11 +144,8 @@ class _NewVistiorState extends State<NewVistior> {
                         ElevatedButton(
                           onPressed: () async {
                             final now = DateTime.now();
-                            bool a = await DateTime.parse(expectedTime.text)
-                                .isBefore(now);
-
                             if (DateTime.parse(expectedTime.text)
-                                    .isBefore(now) &&
+                                    .isAfter(now) &&
                                 nameController.text != "") {
                               VistiorController().NewVistior(expectedTime.text,
                                   icpassport.text, nameController.text);
