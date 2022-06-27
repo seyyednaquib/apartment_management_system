@@ -32,7 +32,7 @@ class AuthController extends GetxController {
       Get.find<UserController>().user = _user;
       Get.offAll(Root());
     } catch (e) {
-      Get.snackbar("Eroor Creating User", 'message',
+      Get.snackbar("Error Creating User", 'message',
           snackPosition: SnackPosition.BOTTOM);
     }
   }
@@ -46,7 +46,7 @@ class AuthController extends GetxController {
           await UserController().getUser(authResult.user!.uid);
       Get.to(() => AnnouncementImportant());
     } catch (e) {
-      Get.snackbar("Eroor Login", e.toString(),
+      Get.snackbar("Error Login", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
     }
   }
@@ -56,7 +56,7 @@ class AuthController extends GetxController {
       await _auth.signOut();
       Get.find<UserController>().clear();
     } catch (e) {
-      Get.snackbar("Eroor SignOut", 'message',
+      Get.snackbar("Error SignOut", 'message',
           snackPosition: SnackPosition.BOTTOM);
     }
   }

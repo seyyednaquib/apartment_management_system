@@ -1,3 +1,4 @@
+import 'package:apartment_management_system/MVVM/VIEW/login.dart';
 import 'package:apartment_management_system/Model/resident.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
 import 'authController.dart';
+import 'bindings/root.dart';
 
 class UserController extends GetxController {
   Rx<UserModel> _userModel = UserModel().obs;
@@ -52,6 +54,19 @@ class UserController extends GetxController {
           await UserController().getUser(Get.find<AuthController>().user!);
     } catch (e) {
       print(e);
+    }
+  }
+
+  ChangePassword(String newPassword) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.updatePassword(newPassword);
+      await FirebaseAuth.instance.signOut();
+      Get.find<UserController>().clear();
+      Get.offAll(() => Login());
+      Get.snackbar("Password Updated", 'Please Login with the new Password',
+          snackPosition: SnackPosition.BOTTOM);
+    } catch (error) {
+      print(error);
     }
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatars/avatars.dart';
 import '../../../Contoller/userController.dart';
+import 'edit_profile_passoword.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -24,7 +25,23 @@ class _ProfileState extends State<Profile> {
           resizeToAvoidBottomInset: false,
           body: Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: buildAppBar(context, 'Profile'),
+              appBar: AppBar(
+                  title: Text(
+                    'Profile',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  leading: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: const Icon(Icons.arrow_back_ios_new,
+                        color: Colors.black),
+                  )),
               body: Padding(
                   padding: EdgeInsets.all(0),
                   child: SingleChildScrollView(
@@ -129,16 +146,35 @@ class _ProfileState extends State<Profile> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
+                            Get.to(() => ChangePassword());
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(230, 125, 13, 253),
+                              fixedSize: const Size(200, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: Text(
+                            'Change Password',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
                             Get.to(() => EditProfile(
                                 c.user.rName, c.user.rPhone, c.user.rUnit));
                           },
                           style: ElevatedButton.styleFrom(
                               primary: Color.fromARGB(230, 125, 13, 253),
-                              fixedSize: const Size(100, 50),
+                              fixedSize: const Size(200, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: Text(
-                            'Update',
+                            'Edit Profile',
                             style: TextStyle(
                               fontSize: 18,
                             ),

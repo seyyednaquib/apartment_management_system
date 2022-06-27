@@ -1,9 +1,11 @@
 import 'package:apartment_management_system/Contoller/service_controller.dart';
+import 'package:apartment_management_system/Contoller/view_pdf.dart';
 import 'package:apartment_management_system/Contoller/work_permit_controller.dart';
 
 import 'package:apartment_management_system/MVVM/VIEW/service/bookService.dart';
 
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
+import 'package:apartment_management_system/MVVM/VIEW/widgets/pdf_view.dart';
 import 'package:apartment_management_system/MVVM/VIEW/workPermit_create.dart';
 
 import 'package:apartment_management_system/Model/service.dart';
@@ -152,10 +154,19 @@ class _MyWorkPermitState extends State<MyWorkPermit> {
                                 right: 10,
                                 child: (nextorder.status.toString() == "")
                                     ? Text('')
-                                    : Icon(
-                                        Icons.picture_as_pdf,
-                                        color: Colors.purple,
-                                        size: 30,
+                                    : InkWell(
+                                        onTap: () async {
+                                          final url = nextorder.pdfPath;
+                                          final file =
+                                              await PDFViewer.loadNetwork(url);
+                                          Get.to(
+                                              () => PDFViewerPage(file: file));
+                                        },
+                                        child: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.purple,
+                                          size: 30,
+                                        ),
                                       ),
                               )
                             ]),

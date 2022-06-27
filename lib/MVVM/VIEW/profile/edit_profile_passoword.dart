@@ -1,37 +1,31 @@
+import 'package:apartment_management_system/Contoller/bindings/root.dart';
 import 'package:apartment_management_system/MVVM/VIEW/profile/profile.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/appbar_widget.dart';
 import 'package:apartment_management_system/MVVM/VIEW/widgets/textfield_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Contoller/userController.dart';
 
-class EditProfile extends StatefulWidget {
-  final String? oldName;
-  final String? oldPhone;
-  final String? oldUnit;
-  const EditProfile(this.oldName, this.oldPhone, this.oldUnit, {Key? key})
-      : super(key: key);
+class ChangePassword extends StatefulWidget {
+  const ChangePassword({Key? key}) : super(key: key);
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<ChangePassword> createState() => _ChangePasswordState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     UserController c = Get.put(UserController());
-    TextEditingController nameController =
-        TextEditingController(text: widget.oldName);
-    TextEditingController unitController =
-        TextEditingController(text: widget.oldUnit);
-    TextEditingController phoneController =
-        TextEditingController(text: widget.oldPhone);
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController passwordConfirmation = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            '',
+            'Change User Password',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
@@ -56,14 +50,17 @@ class _EditProfileState extends State<EditProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Full Name',
+                'New Password',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFormField(
-                controller: nameController,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                controller: passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)),
@@ -78,36 +75,17 @@ class _EditProfileState extends State<EditProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Unit',
+                'New Password Confirmation',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFormField(
-                controller: unitController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 24,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Phone',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                controller: phoneController,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                controller: passwordConfirmation,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)),
@@ -121,12 +99,14 @@ class _EditProfileState extends State<EditProfile> {
           Align(
             child: ElevatedButton(
               onPressed: () async {
-                print(nameController.text +
-                    phoneController.text +
-                    unitController.text);
-                await UserController().updateUser(nameController.text,
-                    phoneController.text, unitController.text);
-                Get.off(Profile());
+                if (passwordController.text == passwordConfirmation.text) {
+                  await UserController()
+                      .ChangePassword(passwordController.text);
+                }
+                print(passwordController.text + passwordConfirmation.text);
+                //  await UserController().updateUser(passwordController.text,
+                //     phoneController.text, passwordConfirmation.text);
+                //Get.off(Profile());
               },
               style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(230, 125, 13, 253),
@@ -134,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))),
               child: const Text(
-                'Confirm Update',
+                'Update Password',
                 style: TextStyle(
                   fontSize: 18,
                 ),
