@@ -4,11 +4,13 @@ class StoreModel {
   final String content;
   final String name;
   final String coordinate;
+  final String dateCreated;
   final String ImgUrl;
   final String category;
 
   StoreModel(
       {required this.content,
+      required this.dateCreated,
       required this.coordinate,
       required this.category,
       required this.name,
@@ -20,6 +22,7 @@ class StoreModel {
         name: data['name'] ?? 'unk',
         coordinate: data['coordinate'] ?? 'unk',
         ImgUrl: data['ImgUrl'] ?? 'unk',
-        category: data['category'] ?? 'unk');
+        category: data['category'] ?? 'unk',
+        dateCreated: '');
   }
 }

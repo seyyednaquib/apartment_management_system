@@ -45,9 +45,9 @@ class BookServiceModel {
         residentId: data['residentId'] ?? 'unk',
         bookindDateAndTime: data['bookindDateAndTime'] ?? 'unk',
         status: data['status'] ?? 'unk',
-        bookingId: data['bookingId'],
-        description: data['description'],
-        ServiceTitle: data['ServiceTitle'],
-        dateCreated: data['dateCreated']);
+        bookingId: data['bookingId'] ?? 'unk',
+        description: data['description'] ?? 'unk',
+        ServiceTitle: data['ServiceTitle'] ?? 'unk',
+        dateCreated: data['dateCreated'] ?? 'unk');
   }
 }

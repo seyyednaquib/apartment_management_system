@@ -21,7 +21,9 @@ class PostWidget extends StatelessWidget {
           .onValue,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return Container(
+            child: Text(''),
+          );
         }
         var userDocument = snapshot.data;
 

@@ -48,6 +48,10 @@ class _ForumPageMainState extends State<ForumPageMain> {
                 forum: forumTemp,
               );
             }));
+          } else {
+            Container(
+              child: Text('..'),
+            );
           }
           return ListView(
               scrollDirection: Axis.vertical,

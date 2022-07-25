@@ -43,6 +43,8 @@ class _NearestLocalStoreState extends State<NearestLocalStore> {
               final tileList = <Card>[];
               if (snapshot.hasData) {
                 final allEvents = snapshot.data as List<StoreModel>;
+                allEvents
+                    .sort((b, a) => b.dateCreated.compareTo(a.dateCreated));
                 tileList.addAll(allEvents.map((store) {
                   if (choosen_index == 0 && store.category == 'restaurant') {
                     return Card(
@@ -230,11 +232,12 @@ class _NearestLocalStoreState extends State<NearestLocalStore> {
                     ),
                   ),
                 ),
-                //if(choosen_index==0){}
-                ListView(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    children: tileList),
+                Expanded(
+                  child: ListView(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      children: tileList),
+                ),
               ]);
             }));
   }

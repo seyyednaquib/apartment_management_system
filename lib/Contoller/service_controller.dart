@@ -23,15 +23,13 @@ class ServiceController extends GetxController {
     return streamToPublish;
   }
 
-  Stream<List<WorkPermitModel>> getBookedServiceUser() {
-    final uid = FirebaseAuth.instance.currentUser!.uid;
-    final serviceStream = _db.child('bookedService/').onValue;
+  Stream<List<BookServiceModel>> getBookedServiceUser() {
+    final serviceStream = _db.child('bookedService').onValue;
     final streamToPublish = serviceStream.map((event) {
       final serviceMap =
           Map<String, dynamic>.from(event.snapshot.value as dynamic);
       final serviceList = serviceMap.entries.map((e) {
-        print(e.value.toString());
-        return WorkPermitModel.fromRTDB(Map<String, dynamic>.from(e.value));
+        return BookServiceModel.fromRTDB(Map<String, dynamic>.from(e.value));
       }).toList();
       return serviceList;
     });
